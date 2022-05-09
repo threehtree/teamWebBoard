@@ -131,9 +131,7 @@
             <div class="customFooter">
                 <%--                ${pageMaker}--%>
                 <span>현재 Page: ${pageMaker.page}, 목록 Total: ${pageMaker.total} </span>
-
                 <ul class="pagination">
-
                     <c:if test="${pageMaker.prev}">
                         <li class="paginate_button page-item" id="dataTable_previous">
                             <a class="page-link" href="${pageMaker.start-1}" aria-label="Previous">
@@ -177,11 +175,28 @@
 
     contractList.addEventListener("click", (e) => {
         console.log("contract")
-        tableValue.remove()
+
     }, false)
 
     clientList.addEventListener("click", (e) => {
         console.log("client")
+
+        // tableValue.innerHTML =`<tr>
+        //             <th scope="row">1</th>
+        //             <td>학원내부 천장공사</td>
+        //             <td>이상없음</td>
+        //             <td>2022/5/10 ~ 2022/7/25</td>
+        //             <td>학원장</td>
+        //             <td>천공장</td>
+        //             <td>입금완료</td>
+        //             <td>불가</td>
+        //             <td>없음</td>
+        //             <td>
+        //                 <button class="modBtn btn btn-secondary">수정</button>
+        //                 <button class="delBtn btn btn-danger">삭제</button>
+        //             </td>
+        //         </tr>`
+
     }, false)
 
     workerList.addEventListener("click", (e) => {
