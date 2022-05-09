@@ -13,3 +13,8 @@ table{
     height:4em;
 }
 
+.customFooter{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

@@ -117,44 +117,48 @@
             </table>
 
 
-<%--            <ul class="dtoList">--%>
-<%--                <c:forEach items="${dtoList}" var="board">--%>
-<%--                    <li>--%>
-<%--                        <span> ${board.bno} </span>--%>
-<%--                            &lt;%&ndash;            전 방법&ndash;%&gt;--%>
-<%--                            &lt;%&ndash;            <span><a href='/board/read${listDTO.link}&bno=${board.bno}'> ${board.title}</a></span>&ndash;%&gt;--%>
-<%--                        <span>--%>
-<%--                    <a href='/board/read/${board.bno}' class="dtoLink">--%>
-<%--                    <c:out value="${board.title}"></c:out></a>--%>
-<%--                </span>--%>
-<%--                        <span> ${board.content} </span>--%>
-<%--                        <span> ${board.writer} </span>--%>
-<%--                    </li>--%>
-<%--                </c:forEach>--%>
-<%--            </ul>--%>
+            <%--            <ul class="dtoList">--%>
+            <%--                <c:forEach items="${dtoList}" var="board">--%>
+            <%--                    <li>--%>
+            <%--                        <span> ${board.bno} </span>--%>
+            <%--                            &lt;%&ndash;            전 방법&ndash;%&gt;--%>
+            <%--                            &lt;%&ndash;            <span><a href='/board/read${listDTO.link}&bno=${board.bno}'> ${board.title}</a></span>&ndash;%&gt;--%>
+            <%--                        <span>--%>
+            <%--                    <a href='/board/read/${board.bno}' class="dtoLink">--%>
+            <%--                    <c:out value="${board.title}"></c:out></a>--%>
+            <%--                </span>--%>
+            <%--                        <span> ${board.content} </span>--%>
+            <%--                        <span> ${board.writer} </span>--%>
+            <%--                    </li>--%>
+            <%--                </c:forEach>--%>
+            <%--            </ul>--%>
 
+            <div class="customFooter">
+<%--                ${pageMaker}--%>
+                <span>현재 Page: ${pageMaker.page}, 목록 Total: ${pageMaker.total} </span>
 
-            ${pageMaker}
+                <ul class="pagination">
 
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-
-                <c:forEach begin="${pageMaker.start}" end="${pageMaker.end}" var="num">
-                    <li class="page-item"><a class="page-link" href="${num}">${num}</a></li>
-                </c:forEach>
-
-
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-
+                    <c:if test="${pageMaker.prev}">
+                        <li class="paginate_button page-item" id="dataTable_previous">
+                            <a class="page-link" href="${pageMaker.start-1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:forEach begin="${pageMaker.start}" end="${pageMaker.end}" var="num">
+                        <li class="paginate_button page-item"><a class="page-link"
+                                                                 href="${num}">${num}</a></li>
+                    </c:forEach>
+                    <c:if test="${pageMaker.next}">
+                        <li class="paginate_button page-item" id="dataTable_next">
+                            <a class="page-link" href="${pageMaker.end+1}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
             <form class="actionForm" action="/board/list" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
