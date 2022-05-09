@@ -1,0 +1,15 @@
+table{
+    text-align: center;
+}
+
+.searchBar{
+    margin: 0.5em;
+}
+.table-bordered button {
+    margin: 0.3em;
+}
+
+.customListName{
+    height:4em;
+}
+
