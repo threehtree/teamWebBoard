@@ -166,10 +166,28 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
     const linkDiv = document.querySelector(".pagination")
     const actionForm = document.querySelector(".actionForm")
+
+    const contractList = document.querySelector(".contractList")
+    const clientList = document.querySelector(".clientList")
+    const workerList = document.querySelector(".workerList")
+
+    contractList.addEventListener("click", (e)=>{
+        console.log("contract")
+    },false)
+
+    clientList.addEventListener("click", (e)=>{
+        console.log("client")
+    },false)
+
+    workerList.addEventListener("click", (e)=>{
+        console.log("worker")
+    },false)
+
 
     document.querySelector(".dtoList").addEventListener("click", (e) => {
 
