@@ -75,43 +75,40 @@
                     <th scope="col">대금요청</th>
                     <th scope="col">문제요청</th>
                     <th scope="col">기능여부</th>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>학원내부 천장공사</td>
-                    <td>이상없음</td>
-                    <td>2022/5/10 ~ 2022/7/25</td>
-                    <td>학원장</td>
-                    <td>천공장</td>
-                    <td>입금완료</td>
-                    <td>불가</td>
-                    <td>없음</td>
-                    <td>
-                        <button class="btn btn-secondary">수정</button>
-                        <button class="btn btn-danger">삭제</button>
-                    </td>
-                </tr>
-                <c:forEach items="${dtoList}" var="board">
-                    <tr>
-                        <th>${board.bno}</th>
-                        <td>${board.title}</td>
-                        <td>${board.content}</td>
-                        <td>${board.content}</td>
-                        <td>${board.content}</td>
-                        <td>${board.content}</td>
-                        <td>${board.content}</td>
-                        <td>${board.content}</td>
-                        <td>${board.content}</td>
-                        <td>${board.content}</td>
-
-                    </tr>
-                </c:forEach>
                 </tr>
                 </thead>
-                <tbody>
-
+<%--                <tr>--%>
+<%--                    <th scope="row">1</th>--%>
+<%--                    <td>학원내부 천장공사</td>--%>
+<%--                    <td>이상없음</td>--%>
+<%--                    <td>2022/5/10 ~ 2022/7/25</td>--%>
+<%--                    <td>학원장</td>--%>
+<%--                    <td>천공장</td>--%>
+<%--                    <td>입금완료</td>--%>
+<%--                    <td>불가</td>--%>
+<%--                    <td>없음</td>--%>
+<%--                    <td>--%>
+<%--                        <button class="modBtn btn btn-secondary">수정</button>--%>
+<%--                        <button class="delBtn btn btn-danger">삭제</button>--%>
+<%--                    </td>--%>
+<%--                </tr>--%>
+                <tbody class="tableValue">
+                    <c:forEach items="${dtoList}" var="board">
+                        <tr>
+                            <th>${board.bno}</th>
+                            <td>${board.title}</td>
+                            <td>${board.content}</td>
+                            <td>${board.content}</td>
+                            <td>${board.content}</td>
+                            <td>${board.content}</td>
+                            <td>${board.content}</td>
+                            <td>${board.content}</td>
+                            <td>${board.content}</td>
+                            <td><button class="modBtn btn btn-secondary">수정</button>
+                                <button class="delBtn btn btn-danger">삭제</button></td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
-
-
             </table>
 
 
@@ -132,7 +129,7 @@
             <%--            </ul>--%>
 
             <div class="customFooter">
-<%--                ${pageMaker}--%>
+                <%--                ${pageMaker}--%>
                 <span>현재 Page: ${pageMaker.page}, 목록 Total: ${pageMaker.total} </span>
 
                 <ul class="pagination">
@@ -176,17 +173,20 @@
     const clientList = document.querySelector(".clientList")
     const workerList = document.querySelector(".workerList")
 
-    contractList.addEventListener("click", (e)=>{
+    const tableValue = document.querySelector(".tableValue")
+
+    contractList.addEventListener("click", (e) => {
         console.log("contract")
-    },false)
+        tableValue.remove()
+    }, false)
 
-    clientList.addEventListener("click", (e)=>{
+    clientList.addEventListener("click", (e) => {
         console.log("client")
-    },false)
+    }, false)
 
-    workerList.addEventListener("click", (e)=>{
+    workerList.addEventListener("click", (e) => {
         console.log("worker")
-    },false)
+    }, false)
 
 
     document.querySelector(".dtoList").addEventListener("click", (e) => {
