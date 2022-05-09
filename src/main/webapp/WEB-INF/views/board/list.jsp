@@ -22,10 +22,10 @@
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
         </div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">계약관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">의뢰자관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">시공사관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
+            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="#!">계약관리</a>
+            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="#!">의뢰자관리</a>
+            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="#!">시공사관리</a>
+            <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
         </div>
     </div>
     <!-- Page content wrapper-->
@@ -90,7 +90,6 @@
                         <button class="btn btn-danger">삭제</button>
                     </td>
                 </tr>
-
                 <c:forEach items="${dtoList}" var="board">
                     <tr>
                         <th>${board.bno}</th>
@@ -106,7 +105,6 @@
 
                     </tr>
                 </c:forEach>
-
                 </tr>
                 </thead>
                 <tbody>
