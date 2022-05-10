@@ -6,13 +6,12 @@ import java.time.LocalDate;
 
 @Data
 public class RequesterDTO {
-    private String requesterID;
-    private String requesterName;
-    private String requesterCall;
-    private String requesterEmail;
-    private String requesterFile;
+    private String num;
+    private String rid;
+    private String rname;
+    private String rcall;
+    private String remail;
+    private String rfile;
     private String residentNum;
 
-    private LocalDate regDate;
-    private LocalDate updateDate;
 }

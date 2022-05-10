@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.teamwebboard.dto.BoardDTO;
-import org.zerock.teamwebboard.dto.ListDTO;
-import org.zerock.teamwebboard.dto.ListResponseDTO;
-import org.zerock.teamwebboard.dto.PageMaker;
+import org.zerock.teamwebboard.dto.*;
 import org.zerock.teamwebboard.service.BoardService;
+import org.zerock.teamwebboard.service.RequesterService;
+
+import java.util.Arrays;
 
 
 @Log4j2
@@ -24,6 +24,7 @@ public class BoardController {
 
     //Service에서 의존성 주입 받도록 생성 -> @RequiredArgsConstructor
     private final BoardService boardService;
+    private final RequesterService requesterService;
 
     @GetMapping("/read/{bno}")//배열로 보일 수 있어 다중 주소 파라미터 처리 가능 대신 조금 복잡해 질 수 있음
     public String read(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
@@ -67,7 +68,15 @@ public class BoardController {
 //        List<BoardDTO> dtoList = boardService.getList(listDTO);
         ListResponseDTO<BoardDTO> responseDTO = boardService.getList(listDTO);
 
+        log.info("===========================================");
+        requesterService.getColumns();
+        model.addAttribute("col", requesterService.getColumns());
+        log.info("===========================================");
+
+        ListResponseDTO<RequesterDTO> requesterDTOList = requesterService.getRequesterList(listDTO);
+
         model.addAttribute("dtoList",responseDTO.getDtoList());
+        model.addAttribute("requesterList",requesterDTOList.getDtoList());
 
         int total = responseDTO. getTotal();
 

@@ -16,6 +16,8 @@
 </head>
 <body>
 
+<%--<h1> ${requesterList}</h1>--%>
+
 <div class="d-flex" id="wrapper">
 
     <div class="border-end bg-white" id="sidebar-wrapper">
@@ -40,7 +42,8 @@
                         class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                        <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/board/list">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/board/list">Home</a>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="#!">Logout</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Setting</a></li>
                     </ul>
@@ -62,7 +65,7 @@
                 <button class="searchBtn">Search</button>
             </div>
 
-            <table class="table table-bordered dtoList">
+            <table class="table tableMain tableHeader table-bordered dtoList">
                 <thead>
                 <tr>
                     <th scope="col">No.</th>
@@ -77,37 +80,39 @@
                     <th scope="col">기능여부</th>
                 </tr>
                 </thead>
-<%--                <tr>--%>
-<%--                    <th scope="row">1</th>--%>
-<%--                    <td>학원내부 천장공사</td>--%>
-<%--                    <td>이상없음</td>--%>
-<%--                    <td>2022/5/10 ~ 2022/7/25</td>--%>
-<%--                    <td>학원장</td>--%>
-<%--                    <td>천공장</td>--%>
-<%--                    <td>입금완료</td>--%>
-<%--                    <td>불가</td>--%>
-<%--                    <td>없음</td>--%>
-<%--                    <td>--%>
-<%--                        <button class="modBtn btn btn-secondary">수정</button>--%>
-<%--                        <button class="delBtn btn btn-danger">삭제</button>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
+                <%--                <tr>--%>
+                <%--                    <th scope="row">1</th>--%>
+                <%--                    <td>학원내부 천장공사</td>--%>
+                <%--                    <td>이상없음</td>--%>
+                <%--                    <td>2022/5/10 ~ 2022/7/25</td>--%>
+                <%--                    <td>학원장</td>--%>
+                <%--                    <td>천공장</td>--%>
+                <%--                    <td>입금완료</td>--%>
+                <%--                    <td>불가</td>--%>
+                <%--                    <td>없음</td>--%>
+                <%--                    <td>--%>
+                <%--                        <button class="modBtn btn btn-secondary">수정</button>--%>
+                <%--                        <button class="delBtn btn btn-danger">삭제</button>--%>
+                <%--                    </td>--%>
+                <%--                </tr>--%>
                 <tbody class="tableValue">
-                    <c:forEach items="${dtoList}" var="board">
-                        <tr>
-                            <th>${board.bno}</th>
-                            <td>${board.title}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td><button class="modBtn btn btn-secondary">수정</button>
-                                <button class="delBtn btn btn-danger">삭제</button></td>
-                        </tr>
-                    </c:forEach>
+                <c:forEach items="${dtoList}" var="board">
+                    <tr>
+                        <th>${board.bno}</th>
+                        <td>${board.title}</td>
+                        <td>${board.content}</td>
+                        <td>${board.content}</td>
+                        <td>${board.content}</td>
+                        <td>${board.content}</td>
+                        <td>${board.content}</td>
+                        <td>${board.content}</td>
+                        <td>${board.content}</td>
+                        <td>
+                            <button class="modBtn btn btn-secondary">수정</button>
+                            <button class="delBtn btn btn-danger">삭제</button>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
 
@@ -171,7 +176,10 @@
     const clientList = document.querySelector(".clientList")
     const workerList = document.querySelector(".workerList")
 
+    const tableMain = document.querySelector(".tableMain")
+    const tableHeader = document.querySelector(".tableHeader")
     const tableValue = document.querySelector(".tableValue")
+
 
     contractList.addEventListener("click", (e) => {
         console.log("contract")
@@ -181,21 +189,75 @@
     clientList.addEventListener("click", (e) => {
         console.log("client")
 
-        // tableValue.innerHTML =`<tr>
-        //             <th scope="row">1</th>
-        //             <td>학원내부 천장공사</td>
-        //             <td>이상없음</td>
-        //             <td>2022/5/10 ~ 2022/7/25</td>
-        //             <td>학원장</td>
-        //             <td>천공장</td>
-        //             <td>입금완료</td>
-        //             <td>불가</td>
-        //             <td>없음</td>
-        //             <td>
-        //                 <button class="modBtn btn btn-secondary">수정</button>
-        //                 <button class="delBtn btn btn-danger">삭제</button>
-        //             </td>
-        //         </tr>`
+        tableMain.innerHTML =
+            `<thead>
+        <tr>
+            <c:forEach var="i" begin="0" end="6">
+                <th scope="col">${col[i]}</th>
+            </c:forEach>
+            <th>기능여부</th>
+                </tr>
+                </thead>
+                <tbody>
+                         <c:forEach items="${requesterList}" var="requester">
+                <tr>
+                    <th scope="row">${requester.num}</th>
+                    <td>${requester.rid}</td>
+                    <td>${requester.rname}</td>
+                    <td>${requester.rcall}</td>
+                    <td>${requester.remail}학원장</td>
+                    <td>${requester.rfile}</td>
+                    <td>${requester.residentNum}</td>
+                    <td>
+                        <button class="modBtn btn btn-secondary">수정</button>
+                        <button class="delBtn btn btn-danger">삭제</button>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>`
+
+        <%--tableHeader.innerHTML = `<tr>--%>
+        <%--    <c:forEach var="i" begin="0" end="6">--%>
+        <%--        <th scope="col">${col[i]}</th>--%>
+        <%--    </c:forEach>--%>
+        <%--        </tr>`--%>
+
+        <%--tableValue.innerHTML =`--%>
+        <%--    <c:forEach items="${requesterList}" var="requester">--%>
+        <%--        <tr>--%>
+        <%--            <th scope="row">1</th>--%>
+        <%--            <td>${requester.num}</td>--%>
+        <%--            <td>${requester.rid}</td>--%>
+        <%--            <td>${requester.rname}</td>--%>
+        <%--            <td>${requester.remail}학원장</td>--%>
+        <%--            <td>${requester.rfile}</td>--%>
+        <%--            <td>${requester.residentNum}</td>--%>
+        <%--            <td>xxxx</td>--%>
+        <%--            <td>xxxx</td>--%>
+        <%--            <td>--%>
+        <%--                <button class="modBtn btn btn-secondary">수정</button>--%>
+        <%--                <button class="delBtn btn btn-danger">삭제</button>--%>
+        <%--            </td>--%>
+        <%--        </tr>--%>
+        <%--    </c:forEach>`--%>
+
+        <%--<tbody class="tableValue">--%>
+        <%--            <c:forEach items="${dtoList}" var="board">--%>
+        <%--                <tr>--%>
+        <%--                    <th>${board.bno}</th>--%>
+        <%--                    <td>${board.title}</td>--%>
+        <%--                    <td>${board.content}</td>--%>
+        <%--                    <td>${board.content}</td>--%>
+        <%--                    <td>${board.content}</td>--%>
+        <%--                    <td>${board.content}</td>--%>
+        <%--                    <td>${board.content}</td>--%>
+        <%--                    <td>${board.content}</td>--%>
+        <%--                    <td>${board.content}</td>--%>
+        <%--                    <td><button class="modBtn btn btn-secondary">수정</button>--%>
+        <%--                        <button class="delBtn btn btn-danger">삭제</button></td>--%>
+        <%--                </tr>--%>
+        <%--            </c:forEach>--%>
+        <%--        </tbody>--%>
 
     }, false)
 
