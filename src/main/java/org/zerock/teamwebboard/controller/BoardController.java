@@ -65,22 +65,25 @@ public class BoardController {
         log.info("board test............");
         log.info(listDTO );
 
-//        List<BoardDTO> dtoList = boardService.getList(listDTO);
-        ListResponseDTO<BoardDTO> responseDTO = boardService.getList(listDTO);
-
-        log.info("===========================================");
         requesterService.getColumns();
         model.addAttribute("col", requesterService.getColumns());
-        log.info("===========================================");
+
+        //        List<BoardDTO> dtoList = boardService.getList(listDTO);
+        ListResponseDTO<BoardDTO> responseDTO = boardService.getList(listDTO);
 
         ListResponseDTO<RequesterDTO> requesterDTOList = requesterService.getRequesterList(listDTO);
-
+        //ListResponseDTO는 뿌려줄 배열과, 총합 가진것 뿐인데?
         model.addAttribute("dtoList",responseDTO.getDtoList());
+
         model.addAttribute("requesterList",requesterDTOList.getDtoList());
 
         int total = responseDTO. getTotal();
 
         model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
+
+        int requestrerTotal = requesterDTOList.getTotal();
+
+        model.addAttribute("requesterPage", new PageMaker(listDTO.getPage(),requestrerTotal));
 
     }
 

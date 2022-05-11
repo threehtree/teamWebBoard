@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
+
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -15,7 +16,7 @@
     <title>adminPage</title>
 </head>
 <body>
-
+<h1>${requesterPage}</h1>
 <%--<h1> ${requesterList}</h1>--%>
 
 <div class="d-flex" id="wrapper">
@@ -24,7 +25,8 @@
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
         </div>
         <div class="list-group list-group-flush">
-            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="#!">계약관리</a>
+            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3"
+               href="http://localhost:8080/board/list">계약관리</a>
             <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="#!">의뢰자관리</a>
             <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="#!">시공사관리</a>
             <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
@@ -50,7 +52,7 @@
                 </div>
             </div>
         </nav>
-
+<%--ddddd--%>
         <!-- Page content-->
         <div class="container-fluid">
 
@@ -157,6 +159,7 @@
                     </c:if>
                 </ul>
             </div>
+
             <form class="actionForm" action="/board/list" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
@@ -166,11 +169,15 @@
         </div>
     </div>
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
+
     const linkDiv = document.querySelector(".pagination")
     const actionForm = document.querySelector(".actionForm")
+
 
     const contractList = document.querySelector(".contractList")
     const clientList = document.querySelector(".clientList")
@@ -180,90 +187,7 @@
     const tableHeader = document.querySelector(".tableHeader")
     const tableValue = document.querySelector(".tableValue")
 
-
-    contractList.addEventListener("click", (e) => {
-        console.log("contract")
-
-    }, false)
-
-    clientList.addEventListener("click", (e) => {
-        console.log("client")
-
-        tableMain.innerHTML =
-            `<thead>
-        <tr>
-            <c:forEach var="i" begin="0" end="6">
-                <th scope="col">${col[i]}</th>
-            </c:forEach>
-            <th>기능여부</th>
-                </tr>
-                </thead>
-                <tbody>
-                         <c:forEach items="${requesterList}" var="requester">
-                <tr>
-                    <th scope="row">${requester.num}</th>
-                    <td>${requester.rid}</td>
-                    <td>${requester.rname}</td>
-                    <td>${requester.rcall}</td>
-                    <td>${requester.remail}학원장</td>
-                    <td>${requester.rfile}</td>
-                    <td>${requester.residentNum}</td>
-                    <td>
-                        <button class="modBtn btn btn-secondary">수정</button>
-                        <button class="delBtn btn btn-danger">삭제</button>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>`
-
-        <%--tableHeader.innerHTML = `<tr>--%>
-        <%--    <c:forEach var="i" begin="0" end="6">--%>
-        <%--        <th scope="col">${col[i]}</th>--%>
-        <%--    </c:forEach>--%>
-        <%--        </tr>`--%>
-
-        <%--tableValue.innerHTML =`--%>
-        <%--    <c:forEach items="${requesterList}" var="requester">--%>
-        <%--        <tr>--%>
-        <%--            <th scope="row">1</th>--%>
-        <%--            <td>${requester.num}</td>--%>
-        <%--            <td>${requester.rid}</td>--%>
-        <%--            <td>${requester.rname}</td>--%>
-        <%--            <td>${requester.remail}학원장</td>--%>
-        <%--            <td>${requester.rfile}</td>--%>
-        <%--            <td>${requester.residentNum}</td>--%>
-        <%--            <td>xxxx</td>--%>
-        <%--            <td>xxxx</td>--%>
-        <%--            <td>--%>
-        <%--                <button class="modBtn btn btn-secondary">수정</button>--%>
-        <%--                <button class="delBtn btn btn-danger">삭제</button>--%>
-        <%--            </td>--%>
-        <%--        </tr>--%>
-        <%--    </c:forEach>`--%>
-
-        <%--<tbody class="tableValue">--%>
-        <%--            <c:forEach items="${dtoList}" var="board">--%>
-        <%--                <tr>--%>
-        <%--                    <th>${board.bno}</th>--%>
-        <%--                    <td>${board.title}</td>--%>
-        <%--                    <td>${board.content}</td>--%>
-        <%--                    <td>${board.content}</td>--%>
-        <%--                    <td>${board.content}</td>--%>
-        <%--                    <td>${board.content}</td>--%>
-        <%--                    <td>${board.content}</td>--%>
-        <%--                    <td>${board.content}</td>--%>
-        <%--                    <td>${board.content}</td>--%>
-        <%--                    <td><button class="modBtn btn btn-secondary">수정</button>--%>
-        <%--                        <button class="delBtn btn btn-danger">삭제</button></td>--%>
-        <%--                </tr>--%>
-        <%--            </c:forEach>--%>
-        <%--        </tbody>--%>
-
-    }, false)
-
-    workerList.addEventListener("click", (e) => {
-        console.log("worker")
-    }, false)
+    const customFooter = document.querySelector(".customFooter")
 
 
     document.querySelector(".dtoList").addEventListener("click", (e) => {
@@ -293,10 +217,10 @@
         }
 
         const pageNum = target.getAttribute("href")
+
         actionForm.querySelector("input[name='page']").value = pageNum
         actionForm.setAttribute("action", "/board/list")
         actionForm.submit()
-
     }, false)
 
 
