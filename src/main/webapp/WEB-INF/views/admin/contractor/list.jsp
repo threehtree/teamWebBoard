@@ -12,7 +12,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/resources/css/customStyle.css">
-    <title>board</title>
+    <title>adminPage</title>
 </head>
 <body>
 
@@ -24,7 +24,7 @@
         <div class="list-group list-group-flush">
             <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="#!">계약관리</a>
             <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="#!">의뢰자관리</a>
-            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="#!">시공사관리</a>
+            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contractor/list">시공사관리</a>
             <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
         </div>
     </div>
@@ -40,7 +40,7 @@
                         class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                        <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/board/list">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/admin/list">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Logout</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Setting</a></li>
                     </ul>
@@ -66,48 +66,49 @@
                 <thead>
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col">계약명</th>
-                    <th scope="col">계약현황</th>
-                    <th scope="col">계약기간</th>
-                    <th scope="col">의뢰자</th>
-                    <th scope="col">시공사</th>
-                    <th scope="col">입금여부</th>
-                    <th scope="col">대금요청</th>
-                    <th scope="col">문제요청</th>
-                    <th scope="col">기능여부</th>
+                    <th scope="col">시공사ID</th>
+                    <th scope="col">시공사분류</th>
+                    <th scope="col">시공사명</th>
+                    <th scope="col">사업자번호</th>
+                    <th scope="col">시공사번호</th>
+                    <th scope="col">시공사E-mail</th>
+                    <th scope="col">시공사주소</th>
+                    <th scope="col">시공사파일</th>
                 </tr>
                 </thead>
-<%--                <tr>--%>
-<%--                    <th scope="row">1</th>--%>
-<%--                    <td>학원내부 천장공사</td>--%>
-<%--                    <td>이상없음</td>--%>
-<%--                    <td>2022/5/10 ~ 2022/7/25</td>--%>
-<%--                    <td>학원장</td>--%>
-<%--                    <td>천공장</td>--%>
-<%--                    <td>입금완료</td>--%>
-<%--                    <td>불가</td>--%>
-<%--                    <td>없음</td>--%>
-<%--                    <td>--%>
-<%--                        <button class="modBtn btn btn-secondary">수정</button>--%>
-<%--                        <button class="delBtn btn btn-danger">삭제</button>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
+                <%--                <tr>--%>
+                <%--                    <th scope="row">1</th>--%>
+                <%--                    <td>학원내부 천장공사</td>--%>
+                <%--                    <td>이상없음</td>--%>
+                <%--                    <td>2022/5/10 ~ 2022/7/25</td>--%>
+                <%--                    <td>학원장</td>--%>
+                <%--                    <td>천공장</td>--%>
+                <%--                    <td>입금완료</td>--%>
+                <%--                    <td>불가</td>--%>
+                <%--                    <td>없음</td>--%>
+                <%--                    <td>--%>
+                <%--                        <button class="modBtn btn btn-secondary">수정</button>--%>
+                <%--                        <button class="delBtn btn btn-danger">삭제</button>--%>
+                <%--                    </td>--%>
+                <%--                </tr>--%>
                 <tbody class="tableValue">
-                    <c:forEach items="${dtoList}" var="board">
-                        <tr>
-                            <th>${board.bno}</th>
-                            <td>${board.title}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td>${board.content}</td>
-                            <td><button class="modBtn btn btn-secondary">수정</button>
-                                <button class="delBtn btn btn-danger">삭제</button></td>
-                        </tr>
-                    </c:forEach>
+                <c:forEach items="${CTdtoList}" var="ct">
+                    <tr>
+                        <th>${ct.ctno}</th>
+                        <td>${ct.ctID}</td>
+                        <td>${ct.categoryNum}</td>
+                        <td>${ct.ctName}</td>
+                        <td>${ct.businessNum}</td>
+                        <td>${ct.ctCall}</td>
+                        <td>${ct.ctEmail}</td>
+                        <td>${ct.ctAddress}</td>
+                        <td>${ct.ctFileNum}</td>
+<%--                        <td>${ct.regdate}</td>--%>
+<%--                        <td>${ct.updatedate}</td>--%>
+                        <td><button class="modBtn btn btn-secondary">수정</button>
+                            <button class="delBtn btn btn-danger">삭제</button></td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
 
@@ -152,7 +153,7 @@
                     </c:if>
                 </ul>
             </div>
-            <form class="actionForm" action="/board/list" method="get">
+            <form class="actionForm" action="/contractor/list" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
                 <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
@@ -161,115 +162,7 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-
-    const linkDiv = document.querySelector(".pagination")
-    const actionForm = document.querySelector(".actionForm")
-
-    const contractList = document.querySelector(".contractList")
-    const clientList = document.querySelector(".clientList")
-    const workerList = document.querySelector(".workerList")
-
-    const tableValue = document.querySelector(".tableValue")
-
-    contractList.addEventListener("click", (e) => {
-        console.log("contract")
-
-    }, false)
-
-    clientList.addEventListener("click", (e) => {
-        console.log("client")
-
-        // tableValue.innerHTML =`<tr>
-        //             <th scope="row">1</th>
-        //             <td>학원내부 천장공사</td>
-        //             <td>이상없음</td>
-        //             <td>2022/5/10 ~ 2022/7/25</td>
-        //             <td>학원장</td>
-        //             <td>천공장</td>
-        //             <td>입금완료</td>
-        //             <td>불가</td>
-        //             <td>없음</td>
-        //             <td>
-        //                 <button class="modBtn btn btn-secondary">수정</button>
-        //                 <button class="delBtn btn btn-danger">삭제</button>
-        //             </td>
-        //         </tr>`
-
-    }, false)
-
-    workerList.addEventListener("click", (e) => {
-        console.log("worker")
-    }, false)
 
 
-    document.querySelector(".dtoList").addEventListener("click", (e) => {
-
-        e.preventDefault()
-        e.stopPropagation()
-
-        const target = e.target
-        if (target.getAttribute("class").indexOf('dtoLink') < 0) {
-            return
-        }
-        const url = target.getAttribute("href")
-        //alert(url)
-        actionForm.setAttribute("action", url)
-        actionForm.submit()
-
-    }, false)
-
-    linkDiv.addEventListener("click", (e) => {
-        e.stopPropagation()
-        e.preventDefault()
-
-        const target = e.target
-
-        if (target.getAttribute("class") !== 'page-link') {
-            return
-        }
-
-        const pageNum = target.getAttribute("href")
-        actionForm.querySelector("input[name='page']").value = pageNum
-        actionForm.setAttribute("action", "/board/list")
-        actionForm.submit()
-
-    }, false)
-
-
-    document.querySelector(".searchBtn").addEventListener("click", (e) => {
-        const type = document.querySelector('.searchDiv .type').value
-        const keyword = document.querySelector(".searchDiv input[name='keyword']").value
-
-        console.log(type, keyword)
-
-        actionForm.setAttribute("action", "/board/list")
-        actionForm.querySelector("input[name='page']").value = 1
-        actionForm.querySelector("input[name='type']").value = type
-        actionForm.querySelector("input[name='keyword']").value = keyword
-        actionForm.submit()
-
-
-    }, false)
-
-
-    const result = '${result}'
-
-    console.log(result)
-
-    if (result !== '') {
-        alert("처리되었습니다.")
-    }
-
-
-</script>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="/resources/js/scripts.js"></script>
-
-<!-- fontawesome -->
-<script src="https://kit.fontawesome.com/67818242f4.js" crossorigin="anonymous"></script>
+</div>
 </body>
-</html>

@@ -6,14 +6,15 @@ import java.time.LocalDate;
 
 @Data
 public class ContractorDTO {
-    private String contractorID;
+    private int ctno;
+    private String ctID;
     private Integer categoryNum;
-    private String contractorName;
+    private String ctName;
     private String businessNum;
-    private String contractorCal;
-    private String contractorEmail;
-    private String contractorAddress;
-    private String contractorFile;
+    private String ctCall;
+    private String ctEmail;
+    private String ctAddress;
+    private String ctFileNum;
 
     private LocalDate regDate;
     private LocalDate updateDate;

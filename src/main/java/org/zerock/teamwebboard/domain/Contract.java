@@ -11,20 +11,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Contract {
 
-    private Integer contractNum;
-    private Integer categoryNum;
-    private String requesterID;
-    private String contractorID;
-    private String area;
-    private String workScope;
-    private String workDetail;
-    private Integer workLimit;
-    private String contractState;
-    private String contractName;
-    private String contractFile;
-    private String priceState;
-    private String negotiationState;
-    private String declarationState;
+    private int conno;
+    private String rID;
+    private String conID;
+    private String categoryNum;
+    private String conArea;
+    private String conScope;
+    private String conContent;
+    private LocalDate conStart;
+    private LocalDate conEnd;
+    private String conName;
+    private String conFileNum;
+    private String price;
+    private String negotiationNum;
 
     private LocalDate regDate;
     private LocalDate updateDate;
