@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Contractor {
-    private int ctno;
+    private Integer ctno;
     private String ctID;
     private Integer categoryNum;
     private String ctName;

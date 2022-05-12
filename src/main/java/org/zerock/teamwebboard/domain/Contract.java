@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Contract {
 
-    private int conno;
+    private Integer conno;
     private String reqID;
     private String conID;
     private String categoryNum;

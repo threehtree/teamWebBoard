@@ -12,7 +12,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/resources/css/customStyle.css">
-    <title>adminPage</title>
+    <title>계약관리</title>
 </head>
 <body>
 
@@ -162,7 +162,115 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+    const linkDiv = document.querySelector(".pagination")
+    const actionForm = document.querySelector(".actionForm")
+
+    const contractList = document.querySelector(".contractList")
+    const clientList = document.querySelector(".clientList")
+    const workerList = document.querySelector(".workerList")
+
+    const tableValue = document.querySelector(".tableValue")
+
+    contractList.addEventListener("click", (e) => {
+        console.log("contract")
+
+    }, false)
+
+    clientList.addEventListener("click", (e) => {
+        console.log("client")
+
+        // tableValue.innerHTML =`<tr>
+        //             <th scope="row">1</th>
+        //             <td>학원내부 천장공사</td>
+        //             <td>이상없음</td>
+        //             <td>2022/5/10 ~ 2022/7/25</td>
+        //             <td>학원장</td>
+        //             <td>천공장</td>
+        //             <td>입금완료</td>
+        //             <td>불가</td>
+        //             <td>없음</td>
+        //             <td>
+        //                 <button class="modBtn btn btn-secondary">수정</button>
+        //                 <button class="delBtn btn btn-danger">삭제</button>
+        //             </td>
+        //         </tr>`
+
+    }, false)
+
+    workerList.addEventListener("click", (e) => {
+        console.log("worker")
+    }, false)
 
 
-</div>
+    document.querySelector(".dtoList").addEventListener("click", (e) => {
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+        if (target.getAttribute("class").indexOf('dtoLink') < 0) {
+            return
+        }
+        const url = target.getAttribute("href")
+        //alert(url)
+        actionForm.setAttribute("action", url)
+        actionForm.submit()
+
+    }, false)
+
+    linkDiv.addEventListener("click", (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+
+        const target = e.target
+
+        if (target.getAttribute("class") !== 'page-link') {
+            return
+        }
+
+        const pageNum = target.getAttribute("href")
+        actionForm.querySelector("input[name='page']").value = pageNum
+        actionForm.setAttribute("action", "/admin/contract/list")
+        actionForm.submit()
+
+    }, false)
+
+
+    document.querySelector(".searchBtn").addEventListener("click", (e) => {
+        const type = document.querySelector('.searchDiv .type').value
+        const keyword = document.querySelector(".searchDiv input[name='keyword']").value
+
+        console.log(type, keyword)
+
+        actionForm.setAttribute("action", "/board/list")
+        actionForm.querySelector("input[name='page']").value = 1
+        actionForm.querySelector("input[name='type']").value = type
+        actionForm.querySelector("input[name='keyword']").value = keyword
+        actionForm.submit()
+
+
+    }, false)
+
+
+    const result = '${result}'
+
+    console.log(result)
+
+    if (result !== '') {
+        alert("처리되었습니다.")
+    }
+
+
+</script>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/resources/js/scripts.js"></script>
+
+<!-- fontawesome -->
+<script src="https://kit.fontawesome.com/67818242f4.js" crossorigin="anonymous"></script>
 </body>
+</html>

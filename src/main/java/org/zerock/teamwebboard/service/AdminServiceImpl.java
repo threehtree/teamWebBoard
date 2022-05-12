@@ -37,4 +37,9 @@ public class AdminServiceImpl implements AdminService{
                 .total(adminMapper.getAdminTotal(listDTO))
                 .build();
     }
+
+    @Override
+    public void remove(Integer adno) {
+        adminMapper.updateAsRemove(adno);
+    }
 }

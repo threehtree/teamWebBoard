@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Requester {
-    private int reqno;
+    private Integer reqno;
     private String reqID;
     private String reqName;
     private String reqCall;

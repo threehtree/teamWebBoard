@@ -15,5 +15,11 @@
         select count(adno) from tbl_admin
     </select>
 
+    <update id="updateAsRemove">
+        update tbl_admin set adID ='DELETED',adName='DELETED', adCall='DELETED', adEmail='DELETED', authority='DELETED'
+        where adno = #{adno}
+    </update>
+
+
 
 </mapper>
