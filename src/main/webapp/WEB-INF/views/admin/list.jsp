@@ -189,15 +189,10 @@
     const clientList = document.querySelector(".clientList")
     const workerList = document.querySelector(".workerList")
 
-    const delBtn = document.querySelectorAll(".delBtn")
     const tableValue = document.querySelector(".tableValue")
 
 
-    let targetLi;
-
-    console.log("========================================")
-    console.log(delBtn)
-
+    // let targetLi;
 
     // for (let delB of delBtn) {
     tableValue.addEventListener("click", (e) => {
@@ -205,19 +200,25 @@
         e.stopPropagation() //전파 방지
 
         if (!e.target.getAttribute("data-adno")) {
+            //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
             return;
         }
         const adno = e.target.getAttribute("data-adno")
-        console.log("click")
+        //data-adno로 adno값을 저장해둔것을 가져온다
+
         removeServer(adno).then(result => {
             console.log(result)
         })
+        //아래에 비동기 코드
+        //promise로 반환되기때문에 .then절 사용
+        let targetLi;
         targetLi = e.target.closest("td")
         targetLi.innerHTML = "Delete"
-
-        // self.location = "http://localhost:8080/admin/list"
+        //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
+        //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
+        self.location = "http://localhost:8080/admin/list"
         alert("No."+adno+"글이 삭제 되었습니다")
-
+        //나중에 모달로 수정해야한다
     }, false)
     // }
 
@@ -314,13 +315,9 @@
     async function removeServer(adno) {
 
         const res = await axios.delete(`/admin/\${adno}`)
-
+        //delete형식으로 값을 json형식으로 Controller에 넘겨준다
         const result = res.data
-        console.log(result)
-
-
         return result.data
-        // return res.data.result
     }
 
 </script>
