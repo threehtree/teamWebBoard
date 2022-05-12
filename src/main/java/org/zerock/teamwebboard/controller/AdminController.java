@@ -29,9 +29,9 @@ public class AdminController {
         return Map.of("data","Del");
     }
 
-    @GetMapping("/list")
+    @GetMapping("/adminList")
     public void list(ListDTO listDTO, Model model){
-        log.info("admin test............");
+        log.info("adminList test............");
         log.info(listDTO );
 
         ListResponseDTO<AdminDTO> responseDTO = adminService.getAdminList(listDTO);

@@ -22,10 +22,10 @@
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
         </div>
         <div class="list-group list-group-flush">
-            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="#!">계약관리</a>
-            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="#!">의뢰자관리</a>
+            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contract/list">계약관리</a>
+            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/requester/list!">의뢰자관리</a>
             <a class="workerList list-group-item list-group-item-action list-group-item-light p-3"
-               href="http://localhost:8080/admin/contractor/list">시공사관리</a>
+               href="http://localhost:8080/admin/contract/list">시공사관리</a>
             <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
         </div>
     </div>
@@ -41,7 +41,7 @@
                         class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                        <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/admin/list">Home</a>
+                        <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/admin/adminList">Home</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#!">Logout</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Setting</a></li>
@@ -180,7 +180,7 @@
 <script>
 
 
-    console.log("========================================")
+
 
     const linkDiv = document.querySelector(".pagination")
     const actionForm = document.querySelector(".actionForm")
@@ -213,10 +213,10 @@
         //promise로 반환되기때문에 .then절 사용
         let targetLi;
         targetLi = e.target.closest("td")
-        targetLi.innerHTML = "Delete"
+        targetLi.innerHTML = " "
         //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
         //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
-        self.location = "http://localhost:8080/admin/list"
+        self.location = "http://localhost:8080/admin/adminList"
         alert("No."+adno+"글이 삭제 되었습니다")
         //나중에 모달로 수정해야한다
     }, false)
@@ -305,7 +305,6 @@
 
     const result = '${result}'
 
-    console.log(result)
 
     if (result !== '') {
         alert("처리되었습니다.")
