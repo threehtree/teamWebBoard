@@ -10,13 +10,13 @@
             <if test="keyword != null">
                 <foreach collection="types" item="item" separator=" OR " open="(" close=")">
                     <if test='item == "t"'>
-                        title like concat('%', #{keyword}, '%')
+                        adid like concat('%', #{keyword}, '%')
                     </if>
                     <if test='item == "c"'>
-                        content like concat('%', #{keyword}, '%')
+                        adname like concat('%', #{keyword}, '%')
                     </if>
                     <if test='item == "w"'>
-                        writer like concat('%', #{keyword}, '%')
+                        adcall like concat('%', #{keyword}, '%')
                     </if>
                 </foreach>
             </if>

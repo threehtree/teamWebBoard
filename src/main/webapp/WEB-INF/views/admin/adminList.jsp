@@ -56,10 +56,10 @@
 
             <div class="searchDiv">
                 <select class="type">
-                    <option value="">---</option>
-                    <option value="t" ${listDTO.type =="t"?"selected":""}>제목</option>
-                    <option value="tc"  ${listDTO.type =="tc"?"selected":""}>제목내용</option>
-                    <option value="tcw"  ${listDTO.type =="tcw"?"selected":""}>제목내용작성자</option>
+                    <option value=""></option>
+                    <option value="t" ${listDTO.type =="t"?"selected":""}>ID</option>
+                    <option value="tc"  ${listDTO.type =="tc"?"selected":""}>ID+Name</option>
+                    <option value="tcw"  ${listDTO.type =="tcw"?"selected":""}>ID+Name+Number</option>
                 </select>
                 <input type="text" name="keyword" value="${listDTO.keyword}">
                 <button class="searchBtn">Search</button>
@@ -167,7 +167,7 @@
                     </c:if>
                 </ul>
             </div>
-            <form class="actionForm" action="/board/list" method="get">
+            <form class="actionForm" action="/admin/adminList" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
                 <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
@@ -293,7 +293,7 @@
 
         console.log(type, keyword)
 
-        actionForm.setAttribute("action", "/board/list")
+        actionForm.setAttribute("action", "/admin/adminList")
         actionForm.querySelector("input[name='page']").value = 1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
