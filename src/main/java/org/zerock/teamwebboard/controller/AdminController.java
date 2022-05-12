@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.zerock.teamwebboard.dto.*;
 import org.zerock.teamwebboard.service.AdminService;
+
+import java.util.Map;
 
 @Log4j2
 @Controller
@@ -15,6 +16,18 @@ import org.zerock.teamwebboard.service.AdminService;
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
+
+    @DeleteMapping("/{adno}")
+    @ResponseBody
+    public Map<String, String> delete(@PathVariable("adno") Integer adno){
+
+        log.info("============================");
+        log.info("============================");
+        log.info("remove...."+adno);
+        log.info("============================");
+        adminService.remove(adno);
+        return Map.of("data","Del");
+    }
 
     @GetMapping("/list")
     public void list(ListDTO listDTO, Model model){
@@ -27,7 +40,7 @@ public class AdminController {
 
         int total = responseDTO. getTotal();
         model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
-
+        model.addAttribute("aa","Delete");
     }
 
 
