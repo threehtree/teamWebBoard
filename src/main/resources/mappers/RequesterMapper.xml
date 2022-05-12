@@ -7,11 +7,11 @@
     <select id="selectRequesterList"  resultType="org.zerock.teamwebboard.domain.Requester">
         select *
         from tbl_requester
-        order by rno asc
+        order by reqno asc
             limit #{skip},#{size}
     </select>
     <select id="getRequesterTotal" resultType="int">
-        select count(rno) from tbl_requester
+        select count(reqno) from tbl_requester
     </select>
 
 

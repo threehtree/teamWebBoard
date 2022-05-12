@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Data
 public class ContractDTO {
     private int conno;
-    private String rID;
+    private String reqID;
     private String conID;
     private String categoryNum;
     private String conArea;

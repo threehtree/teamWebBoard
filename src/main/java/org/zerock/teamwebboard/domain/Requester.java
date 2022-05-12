@@ -10,12 +10,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Requester {
-    private int rno;
-    private String rID;
-    private String rName;
-    private String rCall;
-    private String rEmail;
-    private String rImg;
+    private int reqno;
+    private String reqID;
+    private String reqName;
+    private String reqCall;
+    private String reqEmail;
+    private String reqImg;
     private String residentNum;
 
     private LocalDate regDate;

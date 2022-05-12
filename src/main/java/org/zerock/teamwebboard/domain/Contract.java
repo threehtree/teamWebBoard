@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Contract {
 
     private int conno;
-    private String rID;
+    private String reqID;
     private String conID;
     private String categoryNum;
     private String conArea;

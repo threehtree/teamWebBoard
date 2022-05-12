@@ -26,7 +26,7 @@ public class ContractController {
 
         ListResponseDTO<ContractDTO> responseDTO = contractService.getContractList(listDTO);
 
-        model.addAttribute("CONdtoList",responseDTO.getDtoList());
+        model.addAttribute("conDtoList",responseDTO.getDtoList());
 
         int total = responseDTO. getTotal();
         model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));

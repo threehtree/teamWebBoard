@@ -19,16 +19,18 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-
-public class RequesterServiceImpl {
+public class RequesterServiceImpl implements RequesterService{
     private final RequesterMapper requesterMapper;
     private final ModelMapper modelMapper;
 
+    @Override
     public ListResponseDTO<RequesterDTO> getRequesterList(ListDTO listDTO) {
-        List<Requester> collectorsList = requesterMapper.selectRequesterList(listDTO);
+
+
+        List<Requester> requesterList = requesterMapper.selectRequesterList(listDTO);
 
         List<RequesterDTO> dtoList =
-                collectorsList.stream().map(requester -> modelMapper.map(requester, RequesterDTO.class))
+                requesterList.stream().map(requester -> modelMapper.map(requester, RequesterDTO.class))
                         .collect(Collectors.toList());
 
         return ListResponseDTO.<RequesterDTO>builder()
@@ -37,4 +39,5 @@ public class RequesterServiceImpl {
                 .build();
 
     }
+
 }

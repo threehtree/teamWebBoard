@@ -23,7 +23,7 @@ public class AdminController {
 
         ListResponseDTO<AdminDTO> responseDTO = adminService.getAdminList(listDTO);
 
-        model.addAttribute("ADdtoList",responseDTO.getDtoList());
+        model.addAttribute("adDtoList",responseDTO.getDtoList());
 
         int total = responseDTO. getTotal();
         model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));

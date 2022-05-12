@@ -25,7 +25,7 @@ public class ContractorController {
 
         ListResponseDTO<ContractorDTO> responseDTO = contractorService.getContractorList(listDTO);
 
-        model.addAttribute("CTdtoList",responseDTO.getDtoList());
+        model.addAttribute("ctDtoList",responseDTO.getDtoList());
 
         int total = responseDTO. getTotal();
         model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
