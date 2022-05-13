@@ -18,9 +18,9 @@
         <property name="driverClassName"
                   value="org.mariadb.jdbc.Driver"></property>
         <property name="jdbcUrl"
-                  value="jdbc:mariadb://localhost:3306/webdb"></property>
-        <property name="username" value="webuser"></property>
-        <property name="password" value="webuser"></property>
+                  value="jdbc:mariadb://localhost:3306/osca"></property>
+        <property name="username" value="oscauser"></property>
+        <property name="password" value="oscauser"></property>
     </bean>
     <!-- HikariCP configuration -->
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
