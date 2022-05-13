@@ -17,8 +17,8 @@
 <body>
 <%--model--%>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    숨겨진 버튼이라 보면 안되요 ㅠㅠㅠ
+<button style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ddddd
 </button>
 
 <!-- Modal -->
@@ -26,15 +26,21 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">정보수정</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <span>의뢰자ID</span>
+                        <input type="text" class="form-control recipient-name" >
                     </div>
+                    <div class="mb-3">
+                        <span>의뢰자이름</span>
+                        <input type="text" class="form-control recipient-name" >
+                    </div>
+
+
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Message:</label>
                         <textarea class="form-control" id="message-text"></textarea>
@@ -191,7 +197,7 @@
                     </c:if>
                 </ul>
             </div>
-            <form class="actionForm" action="/Requester/list" method="get">
+            <form class="actionForm" action="/requester/list" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
                 <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
@@ -228,7 +234,7 @@
 
         if (!e.target.getAttribute("data-reqno")) {
             //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
-
+            console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ")
             return;
 
         }
@@ -322,7 +328,7 @@
 
         console.log(type, keyword)
 
-        actionForm.setAttribute("action", "/board/list")
+        actionForm.setAttribute("action", "/admin/requester/list")
         actionForm.querySelector("input[name='page']").value = 1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
