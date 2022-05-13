@@ -216,7 +216,7 @@
         targetLi.innerHTML = " "
         //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
         //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
-        self.location = "http://localhost:8080/admin/adminList"
+        self.location = `/admin/adminList${listDTO.link}`
         alert("No."+adno+"글이 삭제 되었습니다")
         //나중에 모달로 수정해야한다
     }, false)
@@ -281,7 +281,7 @@
 
         const pageNum = target.getAttribute("href")
         actionForm.querySelector("input[name='page']").value = pageNum
-        actionForm.setAttribute("action", "/admin/list")
+        actionForm.setAttribute("action", "/admin/adminList")
         actionForm.submit()
 
     }, false)
