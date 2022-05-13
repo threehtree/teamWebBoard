@@ -15,8 +15,42 @@
     <title>adminPage</title>
 </head>
 <body>
+<%--model--%>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    숨겨진 버튼이라 보면 안되요 ㅠㅠㅠ
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--modal end--%>
 <div class="d-flex" id="wrapper">
+
 
     <div class="border-end bg-white" id="sidebar-wrapper">
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
@@ -104,9 +138,12 @@
                         <td>${req.regDate}</td>
                         <td>${req.updateDate}</td>
 
-                        <td><button class="modBtn btn btn-secondary">수정</button>
-                            <button class="delBtn btn btn-danger">삭제</button></td>
+                    <c:if test="${req.reqID ne 'DELETED'}">
+                        <td><button data-bs-toggle="modal" data-bs-target="#exampleModal" class="modBtn btn btn-secondary">수정</button>
+                            <button data-reqno='${req.reqno}' class="delBtn btn btn-danger">삭제</button></td>
                     </tr>
+                    </c:if>
+
                 </c:forEach>
                 </tbody>
             </table>
@@ -173,6 +210,44 @@
     const workerList = document.querySelector(".workerList")
 
     const tableValue = document.querySelector(".tableValue")
+
+
+
+    //---------------------------------------------------------------------------------------------------
+
+    tableValue.addEventListener("click", (e) => {
+        e.preventDefault() //기본기능 방지
+        e.stopPropagation() //전파 방지
+        // if(e.target.getAttribute("class").indexOf("modBtn")){
+        if(e.target.getAttribute("class") == 'modBtn btn btn-secondary'){
+
+
+        }
+
+        if (!e.target.getAttribute("data-reqno")) {
+            //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
+
+            return;
+
+        }
+        const reqno = e.target.getAttribute("data-reqno")
+        //data-adno로 adno값을 저장해둔것을 가져온다
+
+        removeServer(reqno).then(result => {
+            console.log(result)
+        })
+        //아래에 비동기 코드
+        //promise로 반환되기때문에 .then절 사용
+        let targetLi;
+        targetLi = e.target.closest("td")
+        targetLi.innerHTML = " "
+        //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
+        //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
+        alert("No."+reqno+"글이 삭제 되었습니다")
+        //나중에 모달로 수정해야한다
+        self.location = `/admin/requester/list${listDTO.link}`
+
+    }, false)
 
     contractList.addEventListener("click", (e) => {
         console.log("contract")
@@ -255,12 +330,21 @@
     }, false)
 
 
+
     const result = '${result}'
 
     console.log(result)
 
     if (result !== '') {
         alert("처리되었습니다.")
+    }
+    //===========================================================================================
+    async function removeServer(reqno) {
+
+        const res = await axios.delete(`/admin/requester/delete/\${reqno}`)
+        //delete형식으로 값을 json형식으로 Controller에 넘겨준다
+        const result = res.data
+        return result.data
     }
 
 

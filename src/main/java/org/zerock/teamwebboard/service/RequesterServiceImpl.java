@@ -40,4 +40,20 @@ public class RequesterServiceImpl implements RequesterService{
 
     }
 
+    @Override
+    public void remove(Integer reqno) {
+        requesterMapper.updateAsRemove(reqno);
+    }
+
+    @Override
+    public void update(RequesterDTO requesterDTO) {
+        log.info("==================================================");
+
+        log.info("==================================================");
+
+        log.info(requesterDTO);
+
+
+    }
+
 }

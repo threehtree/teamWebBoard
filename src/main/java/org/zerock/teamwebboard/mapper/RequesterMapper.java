@@ -8,4 +8,5 @@ import java.util.List;
 public interface RequesterMapper {
     List<Requester> selectRequesterList(ListDTO listDTO);
     int getRequesterTotal(ListDTO listDTO);
+    void updateAsRemove(Integer reqno);
 }

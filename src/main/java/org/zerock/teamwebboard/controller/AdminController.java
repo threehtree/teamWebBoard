@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.teamwebboard.dto.*;
 import org.zerock.teamwebboard.service.AdminService;
 
@@ -42,6 +43,7 @@ public class AdminController {
         model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
         model.addAttribute("aa","Delete");
     }
+
 
 
 }

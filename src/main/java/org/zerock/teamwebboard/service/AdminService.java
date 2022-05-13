@@ -9,4 +9,5 @@ import org.zerock.teamwebboard.dto.ListResponseDTO;
 public interface AdminService {
     ListResponseDTO<AdminDTO> getAdminList(ListDTO listDTO);
     void remove(Integer adno);
+
 }
