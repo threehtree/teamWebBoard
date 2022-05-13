@@ -108,6 +108,8 @@
                     <th scope="col">주민등록번호</th>
                     <th scope="col">가입일</th>
                     <th scope="col">수정일</th>
+                    <th scope="col">삭제여부</th>
+
                 </tr>
                 </thead>
                 <%--                <tr>--%>
@@ -137,8 +139,8 @@
                         <td>${req.residentNum}</td>
                         <td>${req.regDate}</td>
                         <td>${req.updateDate}</td>
-
-                    <c:if test="${req.reqID ne 'DELETED'}">
+                        <td>${req.reqDelFlag}</td>
+                    <c:if test="${req.reqDelFlag ne '0'}">
                         <td><button data-bs-toggle="modal" data-bs-target="#exampleModal" class="modBtn btn btn-secondary">수정</button>
                             <button data-reqno='${req.reqno}' class="delBtn btn btn-danger">삭제</button></td>
                     </tr>

@@ -39,7 +39,7 @@
     </select>
 
     <update id="updateAsRemove">
-        update tbl_requester set reqID ='DELETED',reqName='DELETED', reqCall='DELETED', reqEmail='DELETED', reqImg=' ',birth = 'DELETED' where reqno = #{reqno}
+        update tbl_requester set reqID ='DELETED',reqName='DELETED', reqCall='DELETED', reqEmail='DELETED', reqImg=' ',birth = 'DELETED', reqDelFlag = 0 where reqno = #{reqno}
     </update>
 
 

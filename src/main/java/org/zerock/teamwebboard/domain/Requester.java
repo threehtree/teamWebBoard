@@ -20,5 +20,6 @@ public class Requester {
 
     private LocalDate regDate;
     private LocalDate updateDate;
+    private int reqDelFlag ;
 
 }
