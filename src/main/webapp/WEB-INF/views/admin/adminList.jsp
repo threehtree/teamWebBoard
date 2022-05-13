@@ -198,10 +198,17 @@
     tableValue.addEventListener("click", (e) => {
         e.preventDefault() //기본기능 방지
         e.stopPropagation() //전파 방지
+        // if(e.target.getAttribute("class").indexOf("modBtn")){
+        if(e.target.getAttribute("class") == 'modBtn btn btn-secondary'){
+            alert("수정버튼")
+
+        }
 
         if (!e.target.getAttribute("data-adno")) {
             //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
+
             return;
+
         }
         const adno = e.target.getAttribute("data-adno")
         //data-adno로 adno값을 저장해둔것을 가져온다
