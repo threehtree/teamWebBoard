@@ -42,5 +42,12 @@
         update tbl_requester set reqID ='DELETED',reqName='DELETED', reqCall='DELETED', reqEmail='DELETED', reqImg=' ',birth = 'DELETED', reqDelFlag = 1 where reqno = #{reqno}
     </update>
 
+<!--    <insert id="insert">-->
+<!--        <selectKey resultType="int" keyProperty="reqno" order="AFTER">-->
+<!--            select last_insert_id()-->
+<!--        </selectKey>-->
+<!--        insert into tbl_requester (reqID, reqName, reqCall, reqEmail, reqImg, birth)-->
+<!--        values (#{title},#{content}, #{writer})-->
+<!--    </insert>-->
 
 </mapper>

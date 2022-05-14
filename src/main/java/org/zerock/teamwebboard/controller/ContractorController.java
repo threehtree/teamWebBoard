@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Log4j2
 @Controller
-@RequestMapping("/admin/contractor/")
+@RequestMapping("/contractor/")
 @RequiredArgsConstructor
 public class ContractorController {
     private final ContractorService contractorService;

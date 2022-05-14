@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Log4j2
 @Controller
-@RequestMapping("/admin/requester/")
+@RequestMapping("/requester/")
 @RequiredArgsConstructor
 public class RequesterController {
     private final RequesterService requesterService;
@@ -60,10 +60,11 @@ public class RequesterController {
         log.info("----------------------");
 
         return "redirect:/admin/requester/list/"+reqno+ listDTO.getLink();
-
-
-
 //        return null;
+    }
+    @GetMapping("/register")
+    public void getRegister(){
+
     }
 
 }

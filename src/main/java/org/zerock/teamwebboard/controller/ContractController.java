@@ -14,7 +14,7 @@ import org.zerock.teamwebboard.service.ContractorService;
 
 @Log4j2
 @Controller
-@RequestMapping("/admin/contract/")
+@RequestMapping("/contract/")
 @RequiredArgsConstructor
 public class ContractController {
     private final ContractService contractService;

@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.teamwebboard.dto.*;
 import org.zerock.teamwebboard.service.AdminService;
+import org.zerock.teamwebboard.service.ContractService;
+import org.zerock.teamwebboard.service.ContractorService;
+import org.zerock.teamwebboard.service.RequesterService;
 
 import java.util.Map;
 
@@ -17,21 +20,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
-
-    @DeleteMapping("/{adno}")
-    @ResponseBody
-    public Map<String, String> delete(@PathVariable("adno") Integer adno){
-
-        log.info("============================");
-        log.info("============================");
-        log.info("remove...."+adno);
-        log.info("============================");
-        adminService.remove(adno);
-        return Map.of("data","Del");
-    }
+    private final ContractService contractService;
+    private final ContractorService contractorService;
+    private final RequesterService requesterService;
 
     @GetMapping("/adminList")
-    public void list(ListDTO listDTO, Model model){
+    public void adminList(ListDTO listDTO, Model model){
         log.info("adminList test............");
         log.info(listDTO );
 
@@ -43,6 +37,48 @@ public class AdminController {
         model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
         model.addAttribute("aa","Delete");
     }
+
+    @GetMapping("/contractList")
+    public void contractList(ListDTO listDTO, Model model){
+        log.info("contractList test............");
+        log.info(listDTO );
+
+        ListResponseDTO<ContractDTO> responseDTO = contractService.getContractList(listDTO);
+
+        model.addAttribute("conDtoList",responseDTO.getDtoList());
+
+        int total = responseDTO. getTotal();
+        model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
+
+    }
+    @GetMapping("/contractorList")
+    public void list(ListDTO listDTO, Model model){
+        log.info("contractor test............");
+        log.info(listDTO );
+
+        ListResponseDTO<ContractorDTO> responseDTO = contractorService.getContractorList(listDTO);
+
+        model.addAttribute("ctDtoList",responseDTO.getDtoList());
+
+        int total = responseDTO. getTotal();
+        model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
+
+    }
+
+    @GetMapping("/requesterList")
+    public void requesterList(ListDTO listDTO, Model model){
+        log.info("Requester test............");
+        log.info(listDTO );
+
+        ListResponseDTO<RequesterDTO> responseDTO = requesterService.getRequesterList(listDTO);
+
+        model.addAttribute("reqDtoList",responseDTO.getDtoList());
+
+        int total = responseDTO. getTotal();
+        model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
+
+    }
+
 
 
 

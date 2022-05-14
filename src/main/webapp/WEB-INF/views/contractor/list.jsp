@@ -22,9 +22,9 @@
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
         </div>
         <div class="list-group list-group-flush">
-            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contract/list">계약관리</a>
-            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/requester/list">의뢰자관리</a>
-            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contractor/list">시공사관리</a>
+            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contract/list">계약관리</a>
+            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/requester/list">의뢰자관리</a>
+            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contractor/list">시공사관리</a>
             <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
         </div>
     </div>
@@ -210,7 +210,7 @@
         //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
         alert("No."+ctno+"글이 삭제 되었습니다")
         //나중에 모달로 수정해야한다
-        self.location = `/admin/contractor/list${listDTO.link}`
+        self.location = `/contractor/list${listDTO.link}`
 
     }, false)
 
@@ -274,7 +274,7 @@
 
         const pageNum = target.getAttribute("href")
         actionForm.querySelector("input[name='page']").value = pageNum
-        actionForm.setAttribute("action", "/admin/contractor/list")
+        actionForm.setAttribute("action", "/contractor/list")
         actionForm.submit()
 
     }, false)
@@ -286,7 +286,7 @@
 
         console.log(type, keyword)
 
-        actionForm.setAttribute("action", "/admin/constractor/list")
+        actionForm.setAttribute("action", "/constractor/list")
         actionForm.querySelector("input[name='page']").value = 1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
@@ -306,7 +306,7 @@
 //===========================================================================================================
     async function removeServer(ctno) {
 
-        const res = await axios.delete(`/admin/contractor/delete/\${ctno}`)
+        const res = await axios.delete(`/contractor/delete/\${ctno}`)
         //delete형식으로 값을 json형식으로 Controller에 넘겨준다
         const result = res.data
         return result.data
