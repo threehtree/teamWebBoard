@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class ContractorDTO {
     private int ctno;
     private String ctID;
-    private Integer categoryNum;
+    private String categoryNum;
     private String ctName;
     private String businessNum;
     private String ctCall;
@@ -18,4 +18,5 @@ public class ContractorDTO {
 
     private LocalDate regDate;
     private LocalDate updateDate;
+    private int ctDelFlag ;
 }

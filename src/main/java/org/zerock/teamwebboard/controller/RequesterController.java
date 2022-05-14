@@ -53,17 +53,17 @@ public class RequesterController {
         requesterDTO.setReqno(reqno);
         log.info("modify" + requesterDTO);
 
-//        requesterService.update(requesterDTO);
-//
-//        rttr.addFlashAttribute("result", "reqmodified");
-//
-//        log.info("----------------------");
-//
-//        return "redirect:/board/read/"+reqno+ listDTO.getLink();
-//
+        requesterService.update(requesterDTO);
+
+        rttr.addFlashAttribute("result", "reqmodified");
+
+        log.info("----------------------");
+
+        return "redirect:/admin/requester/list/"+reqno+ listDTO.getLink();
 
 
-        return null;
+
+//        return null;
     }
 
 }

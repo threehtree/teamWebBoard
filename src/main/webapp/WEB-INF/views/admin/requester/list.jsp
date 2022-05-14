@@ -12,48 +12,57 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/resources/css/customStyle.css">
-    <title>adminPage</title>
+    <title>requesterPage</title>
 </head>
 <body>
+
+
 <%--model--%>
 <!-- Button trigger modal -->
-<button style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-ddddd
-</button>
+<%--<button  style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
+<%--    숨겨진 버튼이라 보면 안되요 ㅠㅠㅠ--%>
+<%--</button>--%>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">정보수정</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <span>의뢰자ID</span>
-                        <input type="text" class="form-control recipient-name" >
-                    </div>
-                    <div class="mb-3">
-                        <span>의뢰자이름</span>
-                        <input type="text" class="form-control recipient-name" >
-                    </div>
+<%--<!-- Modal -->--%>
+<%--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
+<%--    <div class="modal-dialog">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>--%>
+<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
 
+<%--                <form class="modForm" action="/modify/${req.reqno}" method="post">--%>
+<%--                    <input type="hidden" name="page" value="${listDTO.page}">--%>
+<%--                    <input type="hidden" name="size" value="${listDTO.size}">--%>
+<%--                    <input type="hidden" name="type" value="${listDTO.type}">--%>
+<%--                    <input type="hidden" name="keyword" value="${listDTO.keyword}">--%>
 
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+<%--                    <div class="mb-3">--%>
+<%--                        <span>ID</span>--%>
+<%--&lt;%&ndash;                        <label for="recipient-name" class="col-form-label">Recipient:</label>&ndash;%&gt;--%>
+<%--                        <input type="text" name="reqID" class="form-control" id="recipient-name" value="${reqDtoList[0].reqID}">--%>
+<%--                    </div>--%>
+<%--                    <div class="mb-3">--%>
+<%--                        <span>hi</span>--%>
+<%--&lt;%&ndash;                        <label for="message-text" class="col-form-label">Message:</label>&ndash;%&gt;--%>
+<%--                        <textarea class="form-control" id="message-text" value="${reqDtoList[0].reqCall}"></textarea>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+
+<%--            <div class="modal-footer">--%>
+<%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
+<%--                <button type="button" class="btn btn-primary">Save changes</button>--%>
+<%--            </div>--%>
+
+<%--            <form class="actionForm" action="/requester/delete${reqDtoList[0].reqno}" method="post">--%>
+<%--            </form>--%>
+
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <%--modal end--%>
 <div class="d-flex" id="wrapper">
 
@@ -134,7 +143,7 @@ ddddd
                 <%--                    </td>--%>
                 <%--                </tr>--%>
                 <tbody class="tableValue">
-                <c:forEach items="${reqDtoList}" var="req">
+                <c:forEach items="${reqDtoList}" var="req" varStatus="modIdx">
                     <tr>
                         <th>${req.reqno}</th>
                         <td>${req.reqID}</td>
@@ -146,8 +155,8 @@ ddddd
                         <td>${req.regDate}</td>
                         <td>${req.updateDate}</td>
                         <td>${req.reqDelFlag}</td>
-                    <c:if test="${req.reqDelFlag ne '0'}">
-                        <td><button data-bs-toggle="modal" data-bs-target="#exampleModal" class="modBtn btn btn-secondary">수정</button>
+                    <c:if test="${req.reqDelFlag ne '1'}">
+                        <td><button data-modIdx="${modIdx.index}" data-bs-toggle="modal" data-bs-target="#exampleModal" class="modBtn btn btn-secondary">수정</button>
                             <button data-reqno='${req.reqno}' class="delBtn btn btn-danger">삭제</button></td>
                     </tr>
                     </c:if>
@@ -219,7 +228,7 @@ ddddd
 
     const tableValue = document.querySelector(".tableValue")
 
-
+    let arridx ;
 
     //---------------------------------------------------------------------------------------------------
 
@@ -227,14 +236,15 @@ ddddd
         e.preventDefault() //기본기능 방지
         e.stopPropagation() //전파 방지
         // if(e.target.getAttribute("class").indexOf("modBtn")){
-        if(e.target.getAttribute("class") == 'modBtn btn btn-secondary'){
+        if(e.target.getAttribute("data-modIdx")){
+            arridx = e.target.getAttribute("data-modIdx")
 
 
         }
 
         if (!e.target.getAttribute("data-reqno")) {
             //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
-            console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ")
+
             return;
 
         }

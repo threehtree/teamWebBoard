@@ -36,4 +36,9 @@ public class ContractorServiceImpl implements ContractorService{
                 .build();
 
     }
+
+    @Override
+    public void remove(Integer ctno) {
+        contractorMapper.updateAsRemove(ctno);
+    }
 }

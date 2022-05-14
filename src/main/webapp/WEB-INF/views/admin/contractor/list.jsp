@@ -105,9 +105,11 @@
                         <td>${ct.ctFileNum}</td>
 <%--                        <td>${ct.regdate}</td>--%>
 <%--                        <td>${ct.updatedate}</td>--%>
+                        <c:if test="${ct.ctDelFlag ne '1'}">
                         <td><button class="modBtn btn btn-secondary">수정</button>
-                            <button class="delBtn btn btn-danger">삭제</button></td>
+                            <button data-ctno='${ct.ctno}' class="delBtn btn btn-danger">삭제</button></td>
                     </tr>
+                    </c:if>
                 </c:forEach>
                 </tbody>
             </table>
@@ -174,6 +176,43 @@
     const workerList = document.querySelector(".workerList")
 
     const tableValue = document.querySelector(".tableValue")
+    //----------------------------------------------------------------------------------------
+
+    tableValue.addEventListener("click", (e) => {
+        e.preventDefault() //기본기능 방지
+        e.stopPropagation() //전파 방지
+        // if(e.target.getAttribute("class").indexOf("modBtn")){
+        // if(e.target.getAttribute("data-modIdx")){
+        //     arridx = e.target.getAttribute("data-modIdx")
+        //
+        //
+        // }
+
+        if (!e.target.getAttribute("data-ctno")) {
+            //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
+
+            return;
+
+        }
+        const ctno = e.target.getAttribute("data-ctno")
+        //data-adno로 adno값을 저장해둔것을 가져온다
+
+        removeServer(ctno).then(result => {
+            console.log(result)
+        })
+        //아래에 비동기 코드
+        //promise로 반환되기때문에 .then절 사용
+        let targetLi;
+        targetLi = e.target.closest("td")
+        targetLi.innerHTML = " "
+        //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
+        //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
+        alert("No."+ctno+"글이 삭제 되었습니다")
+        //나중에 모달로 수정해야한다
+        self.location = `/admin/requester/list${listDTO.link}`
+
+    }, false)
+
 
     contractList.addEventListener("click", (e) => {
         console.log("contract")
@@ -246,7 +285,7 @@
 
         console.log(type, keyword)
 
-        actionForm.setAttribute("action", "/board/list")
+        actionForm.setAttribute("action", "/admin/constractor/list")
         actionForm.querySelector("input[name='page']").value = 1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
@@ -263,7 +302,14 @@
     if (result !== '') {
         alert("처리되었습니다.")
     }
+//===========================================================================================================
+    async function removeServer(ctno) {
 
+        const res = await axios.delete(`/admin/contractor/delete/\${reqno}`)
+        //delete형식으로 값을 json형식으로 Controller에 넘겨준다
+        const result = res.data
+        return result.data
+    }
 
 </script>
 <!-- Bootstrap core JS-->

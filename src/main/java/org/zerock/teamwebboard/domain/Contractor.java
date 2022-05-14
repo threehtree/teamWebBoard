@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Contractor {
     private Integer ctno;
     private String ctID;
-    private Integer categoryNum;
+    private String categoryNum;
     private String ctName;
     private String businessNum;
     private String ctCall;
@@ -22,4 +22,5 @@ public class Contractor {
 
     private LocalDate regDate;
     private LocalDate updateDate;
+    private int ctDelFlag ;
 }

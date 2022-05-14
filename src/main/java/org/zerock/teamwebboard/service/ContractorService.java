@@ -7,4 +7,5 @@ import org.zerock.teamwebboard.dto.ListResponseDTO;
 
 public interface ContractorService {
     ListResponseDTO<ContractorDTO> getContractorList(ListDTO listDTO);
+    void remove(Integer ctno);
 }

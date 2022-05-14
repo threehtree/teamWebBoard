@@ -9,5 +9,6 @@ import java.util.List;
 public interface ContractorMapper {
     List<Contractor> selectContractorList(ListDTO listDTO);
     int getContractorTotal(ListDTO listDTO);
+    void updateAsRemove(Integer ctno);
 
 }

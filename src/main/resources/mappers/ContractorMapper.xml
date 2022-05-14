@@ -14,6 +14,10 @@
         select count(ctno) from tbl_contractor
     </select>
 
+    <update id="updateAsRemove">
+        update tbl_contractor set ctID ='DELETED',categorynum = 'DELETED',ctName='DELETED',businessNum='DELETED', ctCall='DELETED', ctEmail='DELETED', ctAddress='DELETED',ctFileNum = 'DELETED' where ctno = #{ctno}
+    </update>
+
 
 
 </mapper>
