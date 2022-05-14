@@ -160,7 +160,6 @@
                             <button data-reqno='${req.reqno}' class="delBtn btn btn-danger">삭제</button></td>
                     </tr>
                     </c:if>
-
                 </c:forEach>
                 </tbody>
             </table>

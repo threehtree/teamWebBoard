@@ -15,7 +15,7 @@
     </select>
 
     <update id="updateAsRemove">
-        update tbl_contractor set ctID ='DELETED',categorynum = 'DELETED',ctName='DELETED',businessNum='DELETED', ctCall='DELETED', ctEmail='DELETED', ctAddress='DELETED',ctFileNum = 'DELETED' where ctno = #{ctno}
+        update tbl_contractor set ctID ='DELETED',categorynum = 'DELETED',ctName='DELETED',businessNum='DELETED', ctCall='DELETED', ctEmail='DELETED', ctAddress='DELETED',ctFileNum = 'DELETED',ctDelFlag = 1 where ctno = #{ctno}
     </update>
 
 

@@ -103,12 +103,13 @@
                         <td>${ct.ctEmail}</td>
                         <td>${ct.ctAddress}</td>
                         <td>${ct.ctFileNum}</td>
+                        <td>${ct.ctDelFlag}</td>
 <%--                        <td>${ct.regdate}</td>--%>
 <%--                        <td>${ct.updatedate}</td>--%>
                         <c:if test="${ct.ctDelFlag ne '1'}">
                         <td><button class="modBtn btn btn-secondary">수정</button>
                             <button data-ctno='${ct.ctno}' class="delBtn btn btn-danger">삭제</button></td>
-                    </tr>
+                        </tr>
                     </c:if>
                 </c:forEach>
                 </tbody>
@@ -209,7 +210,7 @@
         //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
         alert("No."+ctno+"글이 삭제 되었습니다")
         //나중에 모달로 수정해야한다
-        self.location = `/admin/requester/list${listDTO.link}`
+        self.location = `/admin/contractor/list${listDTO.link}`
 
     }, false)
 
@@ -305,7 +306,7 @@
 //===========================================================================================================
     async function removeServer(ctno) {
 
-        const res = await axios.delete(`/admin/contractor/delete/\${reqno}`)
+        const res = await axios.delete(`/admin/contractor/delete/\${ctno}`)
         //delete형식으로 값을 json형식으로 Controller에 넘겨준다
         const result = res.data
         return result.data
