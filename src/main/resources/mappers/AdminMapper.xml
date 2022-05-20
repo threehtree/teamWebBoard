@@ -11,37 +11,37 @@
             <if test="keyword != null">
                 <foreach collection="types" item="item" separator=" OR " open="(" close=")">
                     <if test='item == "t"'>
-                        adid like concat('%', #{keyword}, '%')
+                        adID like concat('%', #{keyword}, '%')
                     </if>
                     <if test='item == "c"'>
-                        adname like concat('%', #{keyword}, '%')
+                        adName like concat('%', #{keyword}, '%')
                     </if>
                     <if test='item == "w"'>
-                        adcall like concat('%', #{keyword}, '%')
+                        adCall like concat('%', #{keyword}, '%')
                     </if>
                 </foreach>
             </if>
         </where>
     </sql>
 
-
+<!--    adNo, adID,adPW,adName, adCall, adEmail, adProfile,adBirth,authority,adAddress,authority, regDate, updateDate-->
     <select id="selectAdminList"  resultType="org.zerock.teamwebboard.domain.Admin">
-        select adno, adID,adName, adCall, adEmail, authority, regDate, updateDate
+        select *
         from tbl_admin
 
         <include refid="search"></include>
 
-        order by adno asc
+        order by adNo asc
         limit #{skip},#{size}
     </select>
 
     <select id="getAdminTotal" resultType="int">
-        select count(adno) from tbl_admin
+        select count(adNo) from tbl_admin
         <include refid="search"></include>
     </select>
 
     <update id="updateAsRemove">
-        update tbl_admin set adID ='DELETED',adName='DELETED', adCall='DELETED', adEmail='DELETED', authority='0' where adno = #{adno}
+        update tbl_admin set adID ='DELETED',adName='DELETED', adCall='DELETED', adEmail='DELETED', authority='0' where adNo = #{adNo}
     </update>
 
 

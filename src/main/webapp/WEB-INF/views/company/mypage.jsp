@@ -12,67 +12,19 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/resources/css/customStyle.css">
-    <title>requesterPage</title>
+    <title>CompanyPage</title>
 </head>
 <body>
 
-<%--model--%>
-<!-- Button trigger modal -->
-<%--<button  style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
-<%--    숨겨진 버튼이라 보면 안되요 ㅠㅠㅠ--%>
-<%--</button>--%>
-
-<%--<!-- Modal -->--%>
-<%--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-<%--    <div class="modal-dialog">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>--%>
-<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--            </div>--%>
-<%--            <div class="modal-body">--%>
-
-<%--                <form class="modForm" action="/modify/${req.reqno}" method="post">--%>
-<%--                    <input type="hidden" name="page" value="${listDTO.page}">--%>
-<%--                    <input type="hidden" name="size" value="${listDTO.size}">--%>
-<%--                    <input type="hidden" name="type" value="${listDTO.type}">--%>
-<%--                    <input type="hidden" name="keyword" value="${listDTO.keyword}">--%>
-
-<%--                    <div class="mb-3">--%>
-<%--                        <span>ID</span>--%>
-<%--&lt;%&ndash;                        <label for="recipient-name" class="col-form-label">Recipient:</label>&ndash;%&gt;--%>
-<%--                        <input type="text" name="reqID" class="form-control" id="recipient-name" >--%>
-<%--                    </div>--%>
-<%--                    <div class="mb-3">--%>
-<%--                        <span>hi</span>--%>
-<%--&lt;%&ndash;                        <label for="message-text" class="col-form-label">Message:</label>&ndash;%&gt;--%>
-<%--                        <textarea class="form-control" id="message-text" ></textarea>--%>
-<%--                    </div>--%>
-<%--                </form>--%>
-<%--            </div>--%>
-
-<%--            <div class="modal-footer">--%>
-<%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-<%--                <button type="button" class="btn btn-primary">Save changes</button>--%>
-<%--            </div>--%>
-
-<%--            <form class="actionForm" action="/requester/delete${reqDtoList[0].reqno}" method="post">--%>
-<%--            </form>--%>
-
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--modal end--%>
 <div class="d-flex" id="wrapper">
-
 
     <div class="border-end bg-white" id="sidebar-wrapper">
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
         </div>
         <div class="list-group list-group-flush">
             <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contract/list">계약관리</a>
-            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/requester/list">의뢰자관리</a>
-            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contractor/list">시공사관리</a>
+            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/Member/list">의뢰자관리</a>
+            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/Company/list">시공사관리</a>
             <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
         </div>
     </div>
@@ -114,16 +66,14 @@
                 <thead>
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col">의뢰자ID</th>
-                    <th scope="col">의뢰자이름</th>
-                    <th scope="col">의뢰자번호</th>
-                    <th scope="col">의뢰자E-mail</th>
-                    <th scope="col">의뢰자첨부파일</th>
-                    <th scope="col">주민등록번호</th>
-                    <th scope="col">가입일</th>
-                    <th scope="col">수정일</th>
-                    <th scope="col">삭제여부</th>
-
+                    <th scope="col">시공사ID</th>
+                    <th scope="col">시공사분류</th>
+                    <th scope="col">시공사명</th>
+                    <th scope="col">사업자번호</th>
+                    <th scope="col">시공사번호</th>
+                    <th scope="col">시공사E-mail</th>
+                    <th scope="col">시공사주소</th>
+                    <th scope="col">시공사파일</th>
                 </tr>
                 </thead>
                 <%--                <tr>--%>
@@ -142,22 +92,22 @@
                 <%--                    </td>--%>
                 <%--                </tr>--%>
                 <tbody class="tableValue">
-                <c:forEach items="${reqDtoList}" var="req" varStatus="modIdx">
+                <c:forEach items="${comDtoList}" var="com">
                     <tr>
-                        <th>${req.reqno}</th>
-                        <td>${req.reqID}</td>
-                        <td>${req.reqName}</td>
-                        <td>${req.reqCall}</td>
-                        <td>${req.reqEmail}</td>
-                        <td>${req.reqImg}</td>
-                        <td>${req.residentNum}</td>
-                        <td>${req.regDate}</td>
-                        <td>${req.updateDate}</td>
-                        <td>${req.reqDelFlag}</td>
-                    <c:if test="${req.reqDelFlag ne '1'}">
-<%--                        <td><button data-modIdx="${modIdx.index}" class="modBtn btn btn-secondary">수정</button>--%>
-                            <td><button data-reqno='${req.reqno}' class="delBtn btn btn-danger">삭제</button></td>
-                    </tr>
+                        <th>${com.comNo}</th>
+                        <td>${com.comID}</td>
+
+                        <td>${com.comName}</td>
+                        <td>${com.businessNum}</td>
+                        <td>${com.comPhone}</td>
+                        <td>${com.comEmail}</td>
+
+                        <td>${com.delFlag}</td>
+
+                        <c:if test="${com.delFlag ne '1'}">
+                        <td><button class="modBtn btn btn-secondary">수정</button>
+                            <button data-comNo='${com.comNo}' class="delBtn btn btn-danger">삭제</button></td>
+                        </tr>
                     </c:if>
                 </c:forEach>
                 </tbody>
@@ -204,7 +154,7 @@
                     </c:if>
                 </ul>
             </div>
-            <form class="actionForm" action="/requester/list" method="get">
+            <form class="actionForm" action="/company/mypage" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
                 <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
@@ -225,38 +175,28 @@
     const workerList = document.querySelector(".workerList")
 
     const tableValue = document.querySelector(".tableValue")
-
-    let arridx =0
-
-    //---------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------
 
     tableValue.addEventListener("click", (e) => {
         e.preventDefault() //기본기능 방지
         e.stopPropagation() //전파 방지
         // if(e.target.getAttribute("class").indexOf("modBtn")){
-        if(e.target.getAttribute("class").indexOf('.modBtn') < 0){
-            arridx = parseInt(e.target.getAttribute("data-modIdx"))
-            // alert(arridx)
-            // console.log(arridx)
-            console.log(arridx)
+        // if(e.target.getAttribute("data-modIdx")){
+        //     arridx = e.target.getAttribute("data-modIdx")
+        //
+        //
+        // }
 
-
-            console.log(${reqDtoList[3].reqno})
-            <%--self.location = `/admin/requester/modify${reqDtoList[arridx].reqno}`--%>
-            // $('.form-control').val(arridx)
-
-        }
-
-        if (!e.target.getAttribute("data-reqno")) {
-            //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
+        if (!e.target.getAttribute("data-comNo")) {
+            //이벤트가 발생한곳에서 data-adNo로 값을 가지고 있는지 확인
 
             return;
 
         }
-        const reqno = e.target.getAttribute("data-reqno")
-        //data-adno로 adno값을 저장해둔것을 가져온다
+        const comNo = e.target.getAttribute("data-comNo")
+        //data-adNo로 adNo값을 저장해둔것을 가져온다
 
-        removeServer(reqno).then(result => {
+        removeServer(comNo).then(result => {
             console.log(result)
         })
         //아래에 비동기 코드
@@ -266,11 +206,12 @@
         targetLi.innerHTML = " "
         //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
         //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
-        alert("No."+reqno+"글이 삭제 되었습니다")
+        alert("No."+comNo+"글이 삭제 되었습니다")
         //나중에 모달로 수정해야한다
-        self.location = `/requester/list${listDTO.link}`
+        self.location = `/company/mypage${listDTO.link}`
 
     }, false)
+
 
     contractList.addEventListener("click", (e) => {
         console.log("contract")
@@ -331,7 +272,7 @@
 
         const pageNum = target.getAttribute("href")
         actionForm.querySelector("input[name='page']").value = pageNum
-        actionForm.setAttribute("action", "/admin/requester/list")
+        actionForm.setAttribute("action", "/company/mypage")
         actionForm.submit()
 
     }, false)
@@ -343,7 +284,7 @@
 
         console.log(type, keyword)
 
-        actionForm.setAttribute("action", "/admin/requester/list")
+        actionForm.setAttribute("action", "/company/mypage")
         actionForm.querySelector("input[name='page']").value = 1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
@@ -353,7 +294,6 @@
     }, false)
 
 
-
     const result = '${result}'
 
     console.log(result)
@@ -361,15 +301,14 @@
     if (result !== '') {
         alert("처리되었습니다.")
     }
-    //===========================================================================================
-    async function removeServer(reqno) {
+//===========================================================================================================
+    async function removeServer(comNo) {
 
-        const res = await axios.delete(`/admin/requester/delete/\${reqno}`)
+        const res = await axios.delete(`/company/delete/\${comNo}`)
         //delete형식으로 값을 json형식으로 Controller에 넘겨준다
         const result = res.data
         return result.data
     }
-
 
 </script>
 <!-- Bootstrap core JS-->

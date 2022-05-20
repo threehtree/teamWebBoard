@@ -12,7 +12,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/resources/css/customStyle.css">
-    <title>requesterPage</title>
+    <title>MemberPage</title>
 </head>
 <body>
 
@@ -56,7 +56,7 @@
 <%--                <button type="button" class="btn btn-primary">Save changes</button>--%>
 <%--            </div>--%>
 
-<%--            <form class="actionForm" action="/requester/delete${reqDtoList[0].reqno}" method="post">--%>
+<%--            <form class="actionForm" action="/Member/delete${reqDtoList[0].reqno}" method="post">--%>
 <%--            </form>--%>
 
 <%--        </div>--%>
@@ -70,9 +70,9 @@
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
         </div>
         <div class="list-group list-group-flush">
-            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contract/list">계약관리</a>
-            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/requester/list">의뢰자관리</a>
-            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contractor/list">시공사관리</a>
+            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contractList">계약관리</a>
+            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/MemberList">의뢰자관리</a>
+            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/CompanyList">시공사관리</a>
             <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
         </div>
     </div>
@@ -102,9 +102,9 @@
             <div class="searchDiv">
                 <select class="type">
                     <option value="">---</option>
-                    <option value="t" ${listDTO.type =="t"?"selected":""}>제목</option>
-                    <option value="tc"  ${listDTO.type =="tc"?"selected":""}>제목내용</option>
-                    <option value="tcw"  ${listDTO.type =="tcw"?"selected":""}>제목내용작성자</option>
+                    <option value="t" ${listDTO.type =="t"?"selected":""}>의뢰자ID</option>
+                    <option value="tc"  ${listDTO.type =="tc"?"selected":""}>의뢰자ID,이름</option>
+                    <option value="tcw"  ${listDTO.type =="tcw"?"selected":""}>의뢰자ID,이름,번호</option>
                 </select>
                 <input type="text" name="keyword" value="${listDTO.keyword}">
                 <button class="searchBtn">Search</button>
@@ -147,7 +147,7 @@
                         <th>${req.reqno}</th>
                         <td>${req.reqID}</td>
                         <td>${req.reqName}</td>
-                        <td>${req.reqCall}</td>
+                        <td>${req.memPhone}</td>
                         <td>${req.reqEmail}</td>
                         <td>${req.reqImg}</td>
                         <td>${req.residentNum}</td>
@@ -204,7 +204,7 @@
                     </c:if>
                 </ul>
             </div>
-            <form class="actionForm" action="/requester/list" method="get">
+            <form class="actionForm" action="/MemberList" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
                 <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
@@ -241,19 +241,19 @@
             console.log(arridx)
 
             console.log("${reqDtoList[arridx].reqno}")
-            <%--self.location = `/admin/requester/modify${reqDtoList[arridx].reqno}`--%>
+            <%--self.location = `/admin/Member/modify${reqDtoList[arridx].reqno}`--%>
             // $('.form-control').val(arridx)
 
         }
 
         if (!e.target.getAttribute("data-reqno")) {
-            //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
+            //이벤트가 발생한곳에서 data-adNo로 값을 가지고 있는지 확인
 
             return;
 
         }
         const reqno = e.target.getAttribute("data-reqno")
-        //data-adno로 adno값을 저장해둔것을 가져온다
+        //data-adNo로 adNo값을 저장해둔것을 가져온다
 
         removeServer(reqno).then(result => {
             console.log(result)
@@ -267,7 +267,7 @@
         //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
         alert("No."+reqno+"글이 삭제 되었습니다")
         //나중에 모달로 수정해야한다
-        self.location = `/admin/requester/list${listDTO.link}`
+        <%--self.location = `/admin/MemberList${listDTO.link}`--%>
 
     }, false)
 
@@ -330,7 +330,7 @@
 
         const pageNum = target.getAttribute("href")
         actionForm.querySelector("input[name='page']").value = pageNum
-        actionForm.setAttribute("action", "/admin/requester/list")
+        actionForm.setAttribute("action", "/admin/MemberList")
         actionForm.submit()
 
     }, false)
@@ -342,7 +342,7 @@
 
         console.log(type, keyword)
 
-        actionForm.setAttribute("action", "/admin/requester/list")
+        actionForm.setAttribute("action", "/admin/MemberList")
         actionForm.querySelector("input[name='page']").value = 1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
@@ -363,7 +363,7 @@
     //===========================================================================================
     async function removeServer(reqno) {
 
-        const res = await axios.delete(`/admin/requester/delete/\${reqno}`)
+        const res = await axios.delete(`/admin/Member/delete/\${reqno}`)
         //delete형식으로 값을 json형식으로 Controller에 넘겨준다
         const result = res.data
         return result.data

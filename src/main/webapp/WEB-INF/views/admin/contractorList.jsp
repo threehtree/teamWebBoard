@@ -22,9 +22,9 @@
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
         </div>
         <div class="list-group list-group-flush">
-            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contract/list">계약관리</a>
-            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/requester/list">의뢰자관리</a>
-            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contractor/list">시공사관리</a>
+            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contractList">계약관리</a>
+            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/MemberList">의뢰자관리</a>
+            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/CompanyList">시공사관리</a>
             <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
         </div>
     </div>
@@ -94,7 +94,7 @@
                 <tbody class="tableValue">
                 <c:forEach items="${ctDtoList}" var="ct">
                     <tr>
-                        <th>${ct.ctno}</th>
+                        <th>${ct.comNo}</th>
                         <td>${ct.ctID}</td>
                         <td>${ct.categoryNum}</td>
                         <td>${ct.ctName}</td>
@@ -108,7 +108,7 @@
 <%--                        <td>${ct.updatedate}</td>--%>
 <%--                        <c:if test="${ct.ctDelFlag ne '1'}">--%>
 <%--                        <td><button class="modBtn btn btn-secondary">수정</button>--%>
-                          <td><button data-ctno='${ct.ctno}' class="delBtn btn btn-danger">삭제</button></td>
+                          <td><button data-comNo='${ct.comNo}' class="delBtn btn btn-danger">삭제</button></td>
                         </tr>
 <%--                    </c:if>--%>
                 </c:forEach>
@@ -156,7 +156,7 @@
                     </c:if>
                 </ul>
             </div>
-            <form class="actionForm" action="/contractor/list" method="get">
+            <form class="actionForm" action="/Company/list" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
                 <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
@@ -189,16 +189,16 @@
         //
         // }
 
-        if (!e.target.getAttribute("data-ctno")) {
-            //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
+        if (!e.target.getAttribute("data-comNo")) {
+            //이벤트가 발생한곳에서 data-adNo로 값을 가지고 있는지 확인
 
             return;
 
         }
-        const ctno = e.target.getAttribute("data-ctno")
-        //data-adno로 adno값을 저장해둔것을 가져온다
+        const comNo = e.target.getAttribute("data-comNo")
+        //data-adNo로 adNo값을 저장해둔것을 가져온다
 
-        removeServer(ctno).then(result => {
+        removeServer(comNo).then(result => {
             console.log(result)
         })
         //아래에 비동기 코드
@@ -208,9 +208,9 @@
         targetLi.innerHTML = " "
         //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
         //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
-        alert("No."+ctno+"글이 삭제 되었습니다")
+        alert("No."+comNo+"글이 삭제 되었습니다")
         //나중에 모달로 수정해야한다
-        self.location = `/contractor/list${listDTO.link}`
+        self.location = `/Company/list${listDTO.link}`
 
     }, false)
 
@@ -274,7 +274,7 @@
 
         const pageNum = target.getAttribute("href")
         actionForm.querySelector("input[name='page']").value = pageNum
-        actionForm.setAttribute("action", "/contractor/list")
+        actionForm.setAttribute("action", "/Company/list")
         actionForm.submit()
 
     }, false)
@@ -304,9 +304,9 @@
         alert("처리되었습니다.")
     }
 //===========================================================================================================
-    async function removeServer(ctno) {
+    async function removeServer(comNo) {
 
-        const res = await axios.delete(`/contractor/delete/\${ctno}`)
+        const res = await axios.delete(`/Company/delete/\${comNo}`)
         //delete형식으로 값을 json형식으로 Controller에 넘겨준다
         const result = res.data
         return result.data

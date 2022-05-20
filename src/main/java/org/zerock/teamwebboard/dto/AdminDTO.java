@@ -6,13 +6,17 @@ import java.time.LocalDate;
 
 @Data
 public class AdminDTO {
-    private int adno;
+    private Integer adNo;
     private String adID;
     private String adName;
-    private String adCall;
+    private String adPhone;
     private String adEmail;
-    private int authority;
+    private String adProfile;
+    private String adBirth;
+    private String adAddress;
+    private Integer authority;
 
     private LocalDate regDate;
     private LocalDate updateDate;
+    private int delFlag;
 }

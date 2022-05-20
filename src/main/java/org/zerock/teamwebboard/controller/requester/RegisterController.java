@@ -1,4 +1,4 @@
-package org.zerock.teamwebboard.controller.requester;
+package org.zerock.teamwebboard.controller.Member;
 
 public class RegisterController {
 }

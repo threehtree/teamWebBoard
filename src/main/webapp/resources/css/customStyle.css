@@ -269,12 +269,12 @@
     margin: 0.4em;
 }
 
-.cludeCardRequester {
+.cludeCardMember {
     padding: 0px;
     background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
-.cludeCardContractor {
+.cludeCardCompany {
     padding: 0px;
     background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }

@@ -9,8 +9,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.teamwebboard.dto.*;
 import org.zerock.teamwebboard.service.AdminService;
 import org.zerock.teamwebboard.service.ContractService;
-import org.zerock.teamwebboard.service.ContractorService;
-import org.zerock.teamwebboard.service.RequesterService;
+import org.zerock.teamwebboard.service.CompanyService;
+import org.zerock.teamwebboard.service.MemberService;
 
 import java.util.Map;
 
@@ -21,8 +21,21 @@ import java.util.Map;
 public class AdminController {
     private final AdminService adminService;
     private final ContractService contractService;
-    private final ContractorService contractorService;
-    private final RequesterService requesterService;
+    private final CompanyService CompanyService;
+    private final MemberService MemberService;
+
+//    @DeleteMapping("/delete/{adNo}")
+//    @ResponseBody
+//    public Map<String, String> delete(@PathVariable("adNo") Integer adNo){
+//
+//        log.info("============================");
+//        log.info("============================");
+//        log.info("remove...."+adNo);
+//        log.info("============================");
+//        adminService.remove(adNo);
+//        return Map.of("data","Del");
+//    }
+
 
     @GetMapping("/adminList")
     public void adminList(ListDTO listDTO, Model model){
@@ -51,12 +64,12 @@ public class AdminController {
         model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
 
     }
-    @GetMapping("/contractorList")
+    @GetMapping("/CompanyList")
     public void list(ListDTO listDTO, Model model){
-        log.info("contractor test............");
+        log.info("Company test............");
         log.info(listDTO );
 
-        ListResponseDTO<ContractorDTO> responseDTO = contractorService.getContractorList(listDTO);
+        ListResponseDTO<CompanyDTO> responseDTO = CompanyService.getCompanyList(listDTO);
 
         model.addAttribute("ctDtoList",responseDTO.getDtoList());
 
@@ -65,12 +78,12 @@ public class AdminController {
 
     }
 
-    @GetMapping("/requesterList")
-    public void requesterList(ListDTO listDTO, Model model){
-        log.info("Requester test............");
+    @GetMapping("/MemberList")
+    public void MemberList(ListDTO listDTO, Model model){
+        log.info("Member test............");
         log.info(listDTO );
 
-        ListResponseDTO<RequesterDTO> responseDTO = requesterService.getRequesterList(listDTO);
+        ListResponseDTO<MemberDTO> responseDTO = MemberService.getMemberList(listDTO);
 
         model.addAttribute("reqDtoList",responseDTO.getDtoList());
 

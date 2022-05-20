@@ -39,7 +39,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public void remove(Integer adno) {
-        adminMapper.updateAsRemove(adno);
+    public void remove(Integer adNo) {
+        adminMapper.updateAsRemove(adNo);
     }
 }

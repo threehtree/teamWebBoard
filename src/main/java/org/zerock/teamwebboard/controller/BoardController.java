@@ -83,15 +83,6 @@ public class BoardController {
 
         log.info("----------------------");
         log.info(boardDTO);
-
-        // 단순하게 파라미터 데이터 쏴주는 방벙
-//        return "redirect:/board/list?result=123";
-
-        // 보내고 데이터 사라짐
-//        rttr.addFlashAttribute("result",123);
-//        // 보내고 데이터 유지됨됨
-       //        rttr.addAttribute("num",321);
-
         boardService.insert(boardDTO);
         rttr.addFlashAttribute("result", "insert");
 

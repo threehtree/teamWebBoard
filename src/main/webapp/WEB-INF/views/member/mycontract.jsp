@@ -12,22 +12,70 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/resources/css/customStyle.css">
-    <title>adminPage</title>
+    <title>MyContract</title>
 </head>
 <body>
 
+<%--model--%>
+<!-- Button trigger modal -->
+<%--<button  style="display: none" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
+<%--    숨겨진 버튼이라 보면 안되요 ㅠㅠㅠ--%>
+<%--</button>--%>
+
+<%--<!-- Modal -->--%>
+<%--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
+<%--    <div class="modal-dialog">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>--%>
+<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+
+<%--                <form class="modForm" action="/modify/${req.reqno}" method="post">--%>
+<%--                    <input type="hidden" name="page" value="${listDTO.page}">--%>
+<%--                    <input type="hidden" name="size" value="${listDTO.size}">--%>
+<%--                    <input type="hidden" name="type" value="${listDTO.type}">--%>
+<%--                    <input type="hidden" name="keyword" value="${listDTO.keyword}">--%>
+
+<%--                    <div class="mb-3">--%>
+<%--                        <span>ID</span>--%>
+<%--&lt;%&ndash;                        <label for="recipient-name" class="col-form-label">Recipient:</label>&ndash;%&gt;--%>
+<%--                        <input type="text" name="reqID" class="form-control" id="recipient-name" >--%>
+<%--                    </div>--%>
+<%--                    <div class="mb-3">--%>
+<%--                        <span>hi</span>--%>
+<%--&lt;%&ndash;                        <label for="message-text" class="col-form-label">Message:</label>&ndash;%&gt;--%>
+<%--                        <textarea class="form-control" id="message-text" ></textarea>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+
+<%--            <div class="modal-footer">--%>
+<%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
+<%--                <button type="button" class="btn btn-primary">Save changes</button>--%>
+<%--            </div>--%>
+
+<%--            <form class="actionForm" action="/Member/delete${reqDtoList[0].reqno}" method="post">--%>
+<%--            </form>--%>
+
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--modal end--%>
 <div class="d-flex" id="wrapper">
 
-    <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="customListName sidebar-heading border-bottom bg-light">관리목록
-        </div>
-        <div class="list-group list-group-flush">
-            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contract/list">계약관리</a>
-            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/requester/list">의뢰자관리</a>
-            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contractor/list">시공사관리</a>
-            <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
-        </div>
-    </div>
+
+<%--    <div class="border-end bg-white" id="sidebar-wrapper">--%>
+<%--        <div class="customListName sidebar-heading border-bottom bg-light">관리목록--%>
+<%--        </div>--%>
+<%--        <div class="list-group list-group-flush">--%>
+<%--            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/contract/list">계약관리</a>--%>
+<%--            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/Member/list">의뢰자관리</a>--%>
+<%--            <a class="workerList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/Company/list">시공사관리</a>--%>
+<%--            <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>--%>
+<%--        </div>--%>
+<%--    </div>--%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
         <!-- Top navigation-->
@@ -66,14 +114,9 @@
                 <thead>
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col">시공사ID</th>
-                    <th scope="col">시공사분류</th>
-                    <th scope="col">시공사명</th>
-                    <th scope="col">사업자번호</th>
-                    <th scope="col">시공사번호</th>
-                    <th scope="col">시공사E-mail</th>
-                    <th scope="col">시공사주소</th>
-                    <th scope="col">시공사파일</th>
+                    <th scope="col">계약명</th>
+
+
                 </tr>
                 </thead>
                 <%--                <tr>--%>
@@ -92,24 +135,22 @@
                 <%--                    </td>--%>
                 <%--                </tr>--%>
                 <tbody class="tableValue">
-                <c:forEach items="${ctDtoList}" var="ct">
+                <c:forEach items="${memDtoList}" var="mem" varStatus="modIdx">
                     <tr>
-                        <th>${ct.ctno}</th>
-                        <td>${ct.ctID}</td>
-                        <td>${ct.categoryNum}</td>
-                        <td>${ct.ctName}</td>
-                        <td>${ct.businessNum}</td>
-                        <td>${ct.ctCall}</td>
-                        <td>${ct.ctEmail}</td>
-                        <td>${ct.ctAddress}</td>
-                        <td>${ct.ctFileNum}</td>
-                        <td>${ct.ctDelFlag}</td>
-<%--                        <td>${ct.regdate}</td>--%>
-<%--                        <td>${ct.updatedate}</td>--%>
-                        <c:if test="${ct.ctDelFlag ne '1'}">
-                        <td><button class="modBtn btn btn-secondary">수정</button>
-                            <button data-ctno='${ct.ctno}' class="delBtn btn btn-danger">삭제</button></td>
-                        </tr>
+                        <th>${mem.memNo}</th>
+                        <td>${mem.memID}</td>
+                        <td>${mem.memName}</td>
+                        <td>${mem.memPhone}</td>
+                        <td>${mem.memEmail}</td>
+                        <td>${mem.memProfile}</td>
+                        <td>${mem.memBirth}</td>
+                        <td>${mem.regDate}</td>
+                        <td>${mem.updateDate}</td>
+                        <td>${mem.delFlag}</td>
+                    <c:if test="${mem.delFlag ne '1'}">
+                        <td><button data-modIdx="${mem.memNo}" class="modBtn btn btn-secondary">수정</button>
+                            <td>  <button data-memNo='${mem.memNo}' class="delBtn btn btn-danger">삭제</button></td>
+                    </tr>
                     </c:if>
                 </c:forEach>
                 </tbody>
@@ -156,7 +197,7 @@
                     </c:if>
                 </ul>
             </div>
-            <form class="actionForm" action="/contractor/list" method="get">
+            <form class="actionForm" action="/member/mypage" method="get">
                 <input type="hidden" name="page" value="${listDTO.page}">
                 <input type="hidden" name="size" value="${listDTO.size}">
                 <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
@@ -177,28 +218,38 @@
     const workerList = document.querySelector(".workerList")
 
     const tableValue = document.querySelector(".tableValue")
-    //----------------------------------------------------------------------------------------
+
+    let arridx =0
+
+    //---------------------------------------------------------------------------------------------------
 
     tableValue.addEventListener("click", (e) => {
         e.preventDefault() //기본기능 방지
         e.stopPropagation() //전파 방지
         // if(e.target.getAttribute("class").indexOf("modBtn")){
-        // if(e.target.getAttribute("data-modIdx")){
-        //     arridx = e.target.getAttribute("data-modIdx")
-        //
-        //
-        // }
+        if(e.target.getAttribute("class").indexOf('.modBtn') < 0){
+            arridx = parseInt(e.target.getAttribute("data-modIdx"))
+            // alert(arridx)
+            // console.log(arridx)
+            alert(arridx)
 
-        if (!e.target.getAttribute("data-ctno")) {
-            //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
+
+            <%--console.log(${reqDtoList[3].reqno})--%>
+            self.location = `/member/modify/\${arridx}`
+            // $('.form-control').val(arridx)
+
+        }
+
+        if (!e.target.getAttribute("data-memNo")) {
+            //이벤트가 발생한곳에서 data-adNo로 값을 가지고 있는지 확인
 
             return;
 
         }
-        const ctno = e.target.getAttribute("data-ctno")
-        //data-adno로 adno값을 저장해둔것을 가져온다
+        const memNo = e.target.getAttribute("data-memNo")
+        //data-adNo로 adNo값을 저장해둔것을 가져온다
 
-        removeServer(ctno).then(result => {
+        removeServer(memNo).then(result => {
             console.log(result)
         })
         //아래에 비동기 코드
@@ -208,12 +259,11 @@
         targetLi.innerHTML = " "
         //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
         //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
-        alert("No."+ctno+"글이 삭제 되었습니다")
+        alert("No."+memNo+"글이 삭제 되었습니다")
         //나중에 모달로 수정해야한다
-        self.location = `/contractor/list${listDTO.link}`
+        self.location = `/member/mycontract${listDTO.link}`
 
     }, false)
-
 
     contractList.addEventListener("click", (e) => {
         console.log("contract")
@@ -274,7 +324,7 @@
 
         const pageNum = target.getAttribute("href")
         actionForm.querySelector("input[name='page']").value = pageNum
-        actionForm.setAttribute("action", "/contractor/list")
+        actionForm.setAttribute("action", "/member/mypage")
         actionForm.submit()
 
     }, false)
@@ -286,7 +336,7 @@
 
         console.log(type, keyword)
 
-        actionForm.setAttribute("action", "/constractor/list")
+        actionForm.setAttribute("action", "/member/mypage")
         actionForm.querySelector("input[name='page']").value = 1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
@@ -296,6 +346,7 @@
     }, false)
 
 
+
     const result = '${result}'
 
     console.log(result)
@@ -303,14 +354,16 @@
     if (result !== '') {
         alert("처리되었습니다.")
     }
-//===========================================================================================================
-    async function removeServer(ctno) {
+    //===========================================================================================
+    async function removeServer(memNo) {
 
-        const res = await axios.delete(`/contractor/delete/\${ctno}`)
+        const res = await axios.delete(`/member/delete/\${memNo}`)
         //delete형식으로 값을 json형식으로 Controller에 넘겨준다
         const result = res.data
         return result.data
     }
+
+
 
 </script>
 <!-- Bootstrap core JS-->

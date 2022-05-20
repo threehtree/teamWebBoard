@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.teamwebboard.mapper.CompanyMapper">
+    <sql id="search">
+    <where>
+        <if test="keyword != null">
+            <foreach collection="types" item="item" separator=" OR " open="(" close=")">
+                <if test='item == "t"'>
+                    comId like concat('%', #{keyword}, '%')
+                </if>
+                <if test='item == "c"'>
+                    comName like concat('%', #{keyword}, '%')
+                </if>
+                <if test='item == "w"'>
+                    comPhone like concat('%', #{keyword}, '%')
+                </if>
+            </foreach>
+        </if>
+    </where>
+</sql>
+
+
+<select id="selectCompanyList"  resultType="org.zerock.teamwebboard.domain.Company">
+        select *
+        from tbl_company
+        <include refid="search"></include>
+        order by comNo asc
+            limit #{skip},#{size}
+    </select>
+    <select id="getCompanyTotal" resultType="int">
+        select count(comNo) from tbl_company
+        <include refid="search"></include>
+    </select>
+
+    <update id="updateAsRemove">
+        update tbl_company set comId ='DELETED',comName='DELETED',businessNum='DELETED', comPhone='DELETED', comEmail='DELETED',delFlag = 1 where comNo = #{comNo}
+    </update>
+
+
+
+</mapper>

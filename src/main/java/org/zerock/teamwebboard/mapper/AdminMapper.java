@@ -9,5 +9,5 @@ import java.util.List;
 public interface AdminMapper {
     List<Admin> selectAdminList(ListDTO listDTO);
     int getAdminTotal(ListDTO listDTO);
-    void updateAsRemove(Integer adno);
+    void updateAsRemove(Integer adNo);
 }

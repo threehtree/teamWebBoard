@@ -1,26 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html lang="ko">
 
-<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
     <title>회원가입(의뢰자)</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico"/>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../../../resources/css/styles.css" rel="stylesheet" />
+    <link href="../../../resources/css/styles.css" rel="stylesheet"/>
     <!-- googlefont -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
     <!-- reset -->
-    <link href="../../../resources/css/reset.css" rel="stylesheet" />
+    <link href="../../../resources/css/reset.css" rel="stylesheet"/>
     <!-- custom -->
-    <link href="../../../resources/css/customStyle.css" rel="stylesheet" />
-
+    <link href="../../../resources/css/customStyle.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -61,13 +61,13 @@
 
                                 <p class="registerLogo text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">O.S.C.A</p>
 
-                                <form class="registerForm mx-1 mx-md-4">
+                                <form class="registerForm mx-1 mx-md-4 " action="/member/register" method="post">
 
                                     <div class="d-flex flex-row align-items-center mb-4">
 
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="form3Example1c">아이디</label>
-                                            <input type="text" id="form3Example1c" class="form-control" />
+                                            <input type="text" name="memID" class="reqId form-control"/>
 
                                         </div>
                                     </div>
@@ -76,28 +76,27 @@
 
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="form3Example1c">이름</label>
-                                            <input type="text" id="form3Example1c" class="form-control" />
+                                            <input type="text" name="memName" class="reqName form-control"/>
                                         </div>
                                     </div>
                                     <div class="d-flex flex-row align-items-center mb-4">
-
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="form3Example1c">생년월일</label>
-                                            <input type="text" id="form3Example1c" class="form-control" />
+                                            <input type="text" name="memBirth" class="reqBurith form-control"/>
                                         </div>
                                     </div>
 
                                     <div class="input-group d-flex flex-row align-items-center mb-4">
                                         <div class="form-outline flex-fill mb-0">
-                                            <p class="form-label" for="form3Example3c">회사 주소</p>
+                                            <p class="form-label" for="form3Example3c">주소</p>
                                             <div class="registerAdressFind">
                                                 <input type="text" class="registerAdressInput form-control"
-                                                       id="custom_postcode" placeholder="우편번호">
+                                                       id="custom_postcode" name="reqAddress" placeholder="우편번호">
                                                 <input type="button" class=" form-control-text"
                                                        onclick="custom_execDaumPostcode()" value="우편번호 찾기">
                                             </div>
                                             <input type="text" class="registerAdressInput form-control"
-                                                   id="custom_address" placeholder="주소">
+                                                   id="custom_address" name="memAddress" placeholder="주소">
 
                                             <div class="customFlexRow">
                                                 <input type="text" class="registerAdressInput form-control"
@@ -105,6 +104,8 @@
                                                 <input type="text" class="registerAdressInput form-control"
                                                        id="custom_extraAddress" placeholder="참고항목">
                                             </div>
+
+                                            <div id="map" style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
                                         </div>
                                     </div>
 
@@ -112,14 +113,17 @@
 
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="form3Example1c">전화번호</label>
-                                            <input type="text" id="form3Example1c" class="form-control" />
+                                            <input type="text" name="memPhone" id="form3Example1c" class="reqCall form-control"/>
                                         </div>
                                     </div>
+
+
+
                                     <div class="d-flex flex-row align-items-center mb-4">
 
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="form3Example3c">이메일</label>
-                                            <input type="email" id="form3Example3c" class="form-control" />
+                                            <input type="email" name="memEmail" id="form3Example3c" class="reqEmail form-control"/>
                                         </div>
                                     </div>
 
@@ -127,21 +131,31 @@
 
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="form3Example4c">비밀번호</label>
-                                            <input type="password" id="form3Example4c" class="form-control" />
+                                            <input type="password" name="memPW" id="form3Example4c" class="reqPw form-control"/>
                                         </div>
                                     </div>
 
+                                    <%--                                    <div class="d-flex flex-row align-items-center mb-4">--%>
+
+                                    <%--                                        <div class="form-outline flex-fill mb-0">--%>
+                                    <%--                                            <label class="form-label" for="form3Example4cd">비밀번호 확인</label>--%>
+                                    <%--                                            <input type="password" id="form3Example4cd" class="reqPwCheck form-control"/>--%>
+                                    <%--                                        </div>--%>
+                                    <%--                                    </div>--%>
+
                                     <div class="d-flex flex-row align-items-center mb-4">
 
-                                        <div class="form-outline flex-fill mb-0">
-                                            <label class="form-label" for="form3Example4cd">비밀번호 확인</label>
-                                            <input type="password" id="form3Example4cd" class="form-control" />
+                                        <div class="registerFile form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example3c">프로필 이미지를 넣어주세요.</label>
+                                            <input type="file" name="memProfile" class="reqLogo form-control" multiple/>
+                                            <div class="uploadResult"></div>
                                         </div>
                                     </div>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                         <button type="button"
-                                                class="registerBtn btn btn-primary btn-lg btn-block col-6 mx-auto">가입하기</button>
+                                                class="registerBtn btn btn-primary btn-lg btn-block col-6 mx-auto">가입하기
+                                        </button>
                                     </div>
 
                                 </form>
@@ -158,10 +172,31 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- Core theme JS-->
 <script src="../../../resources/js/scripts.js"></script>
+
+<%--map--%>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" ></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e60987ffadf27e61dcc9c42a7a4a15c&libraries=services" ></script>
+<script src="../../../resources/js/map.js"></script>
 <!-- fontawesome -->
 <script src="https://kit.fontawesome.com/67818242f4.js" crossorigin="anonymous"></script>
+1
+<script>
+
+    document.querySelector(".registerBtn").addEventListener("click", (e)=>{
+        e.preventDefault()
+        e.stopPropagation()
+
+        const registerForm = document.querySelector(".registerForm")
+
+        registerForm.submit()
+    },false)
+
+</script>
+
 </body>
 
 </html>

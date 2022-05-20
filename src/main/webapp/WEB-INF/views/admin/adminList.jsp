@@ -22,8 +22,8 @@
         <div class="customListName sidebar-heading border-bottom bg-light">관리목록
         </div>
         <div class="list-group list-group-flush">
-            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contract/list">계약관리</a>
-            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/requester/list">의뢰자관리</a>
+            <a class="contractList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/contractList">계약관리</a>
+            <a class="clientList list-group-item list-group-item-action list-group-item-light p-3" href="http://localhost:8080/admin/MemberList">의뢰자관리</a>
             <a class="workerList list-group-item list-group-item-action list-group-item-light p-3"
                href="http://localhost:8080/admin/contract/list">시공사관리</a>
             <a class="settingForm list-group-item list-group-item-action list-group-item-light p-3" href="#!">관리설정</a>
@@ -76,7 +76,7 @@
                     <th scope="col">권한</th>
                     <th scope="col">등록시간</th>
                     <th scope="col">수정시간</th>
-                    <th scope="col">기능여부</th>
+<%--                    <th scope="col">기능여부</th>--%>
                 </tr>
                 </thead>
                 <%--                <tr>--%>
@@ -105,7 +105,7 @@
                 <c:forEach items="${adDtoList}" var="admin">
 
                     <tr>
-                        <th class="adno">${admin.adno}</th>
+                        <th class="adNo">${admin.adNo}</th>
                         <td>${admin.adID}</td>
                         <td>${admin.adName}</td>
                         <td>${admin.adCall}</td>
@@ -113,12 +113,12 @@
                         <td>${admin.authority}</td>
                         <td>${admin.regDate}</td>
                         <td>${admin.updateDate}</td>
-                    <c:if test="${admin.adID ne 'DELETED'}">
-                        <td>
-                            <button class="modBtn btn btn-secondary">수정</button>
-                            <button data-adno='${admin.adno}' class="delBtn btn btn-danger">삭제</button>
-                        </td>
-                    </c:if>
+<%--                    <c:if test="${admin.adID ne 'DELETED'}">--%>
+<%--                        <td>--%>
+<%--                            <button class="modBtn btn btn-secondary">수정</button>--%>
+<%--                            <button data-adNo='${admin.adNo}' class="delBtn btn btn-danger">삭제</button>--%>
+<%--                        </td>--%>
+<%--                    </c:if>--%>
                     </tr>
 
                 </c:forEach>
@@ -204,28 +204,28 @@
 
         }
 
-        if (!e.target.getAttribute("data-adno")) {
-            //이벤트가 발생한곳에서 data-adno로 값을 가지고 있는지 확인
+        if (!e.target.getAttribute("data-adNo")) {
+            //이벤트가 발생한곳에서 data-adNo로 값을 가지고 있는지 확인
 
             return;
 
         }
-        const adno = e.target.getAttribute("data-adno")
-        //data-adno로 adno값을 저장해둔것을 가져온다
+        const adNo = e.target.getAttribute("data-adNo")
+        //data-adNo로 adNo값을 저장해둔것을 가져온다
 
-        removeServer(adno).then(result => {
-            console.log(result)
-        })
-        //아래에 비동기 코드
-        //promise로 반환되기때문에 .then절 사용
-        let targetLi;
-        targetLi = e.target.closest("td")
-        targetLi.innerHTML = " "
-        //글목록이 아예 사라지지 않기 때문에 버튼이 남게되어
-        //삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음
-        self.location = `/admin/adminList${listDTO.link}`
-        alert("No."+adno+"글이 삭제 되었습니다")
-        //나중에 모달로 수정해야한다
+        <%--removeServer(adNo).then(result => {--%>
+        <%--    console.log(result)--%>
+        <%--})--%>
+        <%--//아래에 비동기 코드--%>
+        <%--//promise로 반환되기때문에 .then절 사용--%>
+        <%--let targetLi;--%>
+        <%--targetLi = e.target.closest("td")--%>
+        <%--targetLi.innerHTML = " "--%>
+        <%--//글목록이 아예 사라지지 않기 때문에 버튼이 남게되어--%>
+        <%--//삭제후 버튼에 해당하는 부분을 Delete문자열을 넣음--%>
+        <%--&lt;%&ndash;self.location = `/admin/adminList${listDTO.link}`&ndash;%&gt;--%>
+        <%--alert("No."+adNo+"글이 삭제 되었습니다")--%>
+        <%--//나중에 모달로 수정해야한다--%>
     }, false)
     // }
 
@@ -318,13 +318,13 @@
     }
 
     //===========================================================================================
-    async function removeServer(adno) {
-
-        const res = await axios.delete(`/admin/\${adno}`)
-        //delete형식으로 값을 json형식으로 Controller에 넘겨준다
-        const result = res.data
-        return result.data
-    }
+    // async function removeServer(adNo) {
+    //
+    //     const res = await axios.delete(`/admin/delete/\${adNo}`)
+    //     //delete형식으로 값을 json형식으로 Controller에 넘겨준다
+    //     const result = res.data
+    //     return result.data
+    // }
 
 </script>
 <!-- Bootstrap core JS-->

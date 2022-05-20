@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.teamwebboard.mapper.MemberMapper">
+
+    <sql id="search">
+        <where>
+            <if test="keyword != null">
+                <foreach collection="types" item="item" separator=" OR " open="(" close=")">
+                    <if test='item == "t"'>
+                        memid like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='item == "c"'>
+                        memname like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='item == "w"'>
+                        memphone like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="selectMemberList"  resultType="org.zerock.teamwebboard.domain.Member">
+        select *
+        from tbl_Member
+
+        <include refid="search"></include>
+
+        order by memNo asc
+            limit #{skip},#{size}
+    </select>
+    <select id="getMemberTotal" resultType="int">
+        select count(memNo) from tbl_Member where delFlag = 0
+        <include refid="search"></include>
+    </select>
+<!--del부분으로 0 체크해서 삭제부분은 보여주면 안되니까[where delFlag = 0]  -->
+    <update id="updateAsRemove">
+        update tbl_member set memID ='DELETED',memName='DELETED', memPhone='DELETED', memEmail='DELETED', memProfile=' ',memBirth = 'DELETED', delFlag = 1 where memNo = #{memNo}
+    </update>
+
+    <insert id="memInsert">
+        <selectKey resultType="int" keyProperty="memNo" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into tbl_member (memID, memName, memPhone, memEmail,  memBirth,  memAddress, memPW)
+        values (#{memID}, #{memName}, #{memPhone}, #{memEmail}, #{memBirth}, #{memAddress}, #{memPW})
+    </insert>
+
+    <select id="selectNoDeleteMemberList"  resultType="org.zerock.teamwebboard.domain.Member">
+        select *
+        from tbl_Member
+        where delFlag = 0
+        order by memNo asc
+        limit #{skip},#{size}
+    </select>
+    <!--del부분으로 0 체크해서 삭제부분은 보여주면 안되니까[where delFlag = 0]  -->
+
+    <select id="selectMemberOne" resultType="org.zerock.teamwebboard.domain.Member">
+        select *
+        from tbl_member
+        where memNo = #{memNo}
+    </select>
+
+    <update id="memUpdate">
+        update tbl_member
+        set memPhone      = #{memPhone},
+            memAddress    = #{memAddress},
+            memEmail = #{memEmail}
+        where memNo = #{memNo}
+    </update>
+
+
+</mapper>

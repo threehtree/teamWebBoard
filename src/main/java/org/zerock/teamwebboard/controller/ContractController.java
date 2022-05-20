@@ -7,10 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.teamwebboard.dto.*;
-import org.zerock.teamwebboard.mapper.ContractorMapper;
+import org.zerock.teamwebboard.mapper.CompanyMapper;
 import org.zerock.teamwebboard.service.AdminService;
 import org.zerock.teamwebboard.service.ContractService;
-import org.zerock.teamwebboard.service.ContractorService;
+import org.zerock.teamwebboard.service.CompanyService;
 
 @Log4j2
 @Controller
@@ -19,7 +19,7 @@ import org.zerock.teamwebboard.service.ContractorService;
 public class ContractController {
     private final ContractService contractService;
 
-    @GetMapping("/list")
+    @GetMapping("/mypage")
     public void list(ListDTO listDTO, Model model){
         log.info("contract test............");
         log.info(listDTO );

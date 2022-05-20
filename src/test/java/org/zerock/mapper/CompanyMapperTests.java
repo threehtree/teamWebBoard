@@ -8,25 +8,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.teamwebboard.dto.ListDTO;
-import org.zerock.teamwebboard.mapper.ContractorMapper;
+import org.zerock.teamwebboard.mapper.CompanyMapper;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
 
-public class ContractorMapperTests {
+public class CompanyMapperTests {
     @Autowired(required = false)
-    private ContractorMapper contractorMapper;
+    private CompanyMapper CompanyMapper;
 
     @Test
-    public void testContractor(){
+    public void testCompany(){
         ListDTO listDTO = new ListDTO();
-        contractorMapper.getContractorTotal(listDTO);
+        CompanyMapper.getCompanyTotal(listDTO);
     }
     @Test
-    public void testgetContractorTotal(){
+    public void testgetCompanyTotal(){
         ListDTO listDTO = new ListDTO();
-        contractorMapper.getContractorTotal(listDTO);
+        CompanyMapper.getCompanyTotal(listDTO);
+    }
+    @Test
+    public void testgetCompanyList(){
+
+        CompanyMapper.selectCompanyList(new ListDTO());
+    }
+
+    @Test
+    public void testCompanyDel(){
+
+        int comNo = 12;
+        CompanyMapper.updateAsRemove(12);
     }
 
 
