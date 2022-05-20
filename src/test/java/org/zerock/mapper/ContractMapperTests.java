@@ -27,4 +27,5 @@ public class ContractMapperTests {
         ListDTO listDTO = new ListDTO();
         contractMapper.getContractTotal(listDTO);
     }
+
 }

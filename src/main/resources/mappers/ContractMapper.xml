@@ -15,5 +15,52 @@
         select count(conno) from tbl_contract
     </select>
 
+    
+<!--    //////////////////////////////////////////////////////////////////////////////////////////-->
+    <update id="updateAsRemove">
+        update tbl_contract set conName ='DELETED',conCatregory='DELETED',
+                                conLocation='DELETED', conSpace='DELETED',
+                                conContent='DELETED',conRequest = 'DELETED',
+                                conCondition = 'DELETED',conPrice = 'DELTED',
+                                conDocument = 'DELETED', conImg = 'DELTED',
+                                delFlag = 1 where conNo = #{conNo}
+    </update>
 
+    <insert id="conInsert">
+        <selectKey resultType="int" keyProperty="conNo" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into tbl_contract (conName, conCategory, conLocation,  conSpace,  conContent,
+                                  conRequest, conCondition, conStartDay, conEndDay, conPrice,
+                                  conDocument, conImg )
+        values (#{conName}, #{conCategory}, #{conLocation}, #{conSpace}, #{conContent},
+          #{conRequest}, #{conCondition}, #{conStartDay}, #{conEndDay}, #{conPrice},
+          #{conDocument},#{conImg})
+    </insert>
+
+    <select id="selectNoDeleteContractList"  resultType="org.zerock.teamwebboard.domain.Contract">
+        select *
+        from tbl_contract
+        where delFlag = 0
+        order by conNo asc
+            limit #{skip},#{size}
+    </select>
+    <!--del부분으로 0 체크해서 삭제부분은 보여주면 안되니까[where delFlag = 0]  -->
+
+    <select id="selectContractOne" resultType="org.zerock.teamwebboard.domain.Contract">
+        select *
+        from tbl_contract
+        where conNo = #{conNo}
+    </select>
+
+    <update id="conUpdate">
+        update tbl_contract
+        set conName             = #{conName},
+            conCategory         = #{conCategory},
+            conLocation         = #{conLocation}
+
+        where conNo = #{conNo}
+    </update>
+
+    
 </mapper>
